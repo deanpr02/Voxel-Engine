@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/docs
+# Install script for directory: C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/docs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,6 +34,6 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/msys64/mingw64/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/MinGW/bin/objdump.exe")
 endif()
 

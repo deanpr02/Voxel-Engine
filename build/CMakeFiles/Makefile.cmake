@@ -43,17 +43,17 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows.cmake"
   "C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake"
   "C:/Program Files/CMake/share/cmake-3.29/Modules/WriteBasicConfigVersionFile.cmake"
-  "C:/Users/deanp/OneDrive/Documents/Maze/CMakeLists.txt"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/CMakeLists.txt"
   "CMakeFiles/3.29.0-rc4/CMakeCCompiler.cmake"
   "CMakeFiles/3.29.0-rc4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.29.0-rc4/CMakeRCCompiler.cmake"
   "CMakeFiles/3.29.0-rc4/CMakeSystem.cmake"
-  "C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/CMake/cmake_uninstall.cmake.in"
-  "C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/CMake/glfw3.pc.in"
-  "C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/CMake/glfw3Config.cmake.in"
-  "C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/CMakeLists.txt"
-  "C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/docs/CMakeLists.txt"
-  "C:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/src/CMakeLists.txt"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/CMake/cmake_uninstall.cmake.in"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/CMake/glfw3.pc.in"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/CMake/glfw3Config.cmake.in"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/CMakeLists.txt"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/docs/CMakeLists.txt"
+  "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/src/CMakeLists.txt"
   )
 
 # The corresponding makefile is:
@@ -76,7 +76,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/Inferno.dir/DependInfo.cmake"
+  "CMakeFiles/VoxelEngine.dir/DependInfo.cmake"
   "dependencies/glfw/CMakeFiles/uninstall.dir/DependInfo.cmake"
   "dependencies/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "dependencies/glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake"

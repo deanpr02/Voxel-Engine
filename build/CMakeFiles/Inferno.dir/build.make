@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\Maze
+CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\Maze\build
+CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine\build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Inferno.dir/depend.make
@@ -70,123 +70,123 @@ include CMakeFiles/Inferno.dir/flags.make
 
 CMakeFiles/Inferno.dir/src/main.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/main.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/main.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/main.cpp
+CMakeFiles/Inferno.dir/src/main.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/main.cpp
 CMakeFiles/Inferno.dir/src/main.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Inferno.dir/src/main.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/main.cpp.obj -MF CMakeFiles\Inferno.dir\src\main.cpp.obj.d -o CMakeFiles\Inferno.dir\src\main.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Inferno.dir/src/main.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/main.cpp.obj -MF CMakeFiles\Inferno.dir\src\main.cpp.obj.d -o CMakeFiles\Inferno.dir\src\main.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\main.cpp
 
 CMakeFiles/Inferno.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/main.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\main.cpp > CMakeFiles\Inferno.dir\src\main.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\main.cpp > CMakeFiles\Inferno.dir\src\main.cpp.i
 
 CMakeFiles/Inferno.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/main.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\main.cpp -o CMakeFiles\Inferno.dir\src\main.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\main.cpp -o CMakeFiles\Inferno.dir\src\main.cpp.s
 
 CMakeFiles/Inferno.dir/src/glad.c.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/glad.c.obj: CMakeFiles/Inferno.dir/includes_C.rsp
-CMakeFiles/Inferno.dir/src/glad.c.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/glad.c
+CMakeFiles/Inferno.dir/src/glad.c.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/glad.c
 CMakeFiles/Inferno.dir/src/glad.c.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Inferno.dir/src/glad.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/glad.c.obj -MF CMakeFiles\Inferno.dir\src\glad.c.obj.d -o CMakeFiles\Inferno.dir\src\glad.c.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\glad.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Inferno.dir/src/glad.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/glad.c.obj -MF CMakeFiles\Inferno.dir\src\glad.c.obj.d -o CMakeFiles\Inferno.dir\src\glad.c.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\glad.c
 
 CMakeFiles/Inferno.dir/src/glad.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/Inferno.dir/src/glad.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\glad.c > CMakeFiles\Inferno.dir\src\glad.c.i
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\glad.c > CMakeFiles\Inferno.dir\src\glad.c.i
 
 CMakeFiles/Inferno.dir/src/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/Inferno.dir/src/glad.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\glad.c -o CMakeFiles\Inferno.dir\src\glad.c.s
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\glad.c -o CMakeFiles\Inferno.dir\src\glad.c.s
 
 CMakeFiles/Inferno.dir/src/shader.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/shader.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/shader.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/shader.cpp
+CMakeFiles/Inferno.dir/src/shader.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/shader.cpp
 CMakeFiles/Inferno.dir/src/shader.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Inferno.dir/src/shader.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/shader.cpp.obj -MF CMakeFiles\Inferno.dir\src\shader.cpp.obj.d -o CMakeFiles\Inferno.dir\src\shader.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Inferno.dir/src/shader.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/shader.cpp.obj -MF CMakeFiles\Inferno.dir\src\shader.cpp.obj.d -o CMakeFiles\Inferno.dir\src\shader.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\shader.cpp
 
 CMakeFiles/Inferno.dir/src/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/shader.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\shader.cpp > CMakeFiles\Inferno.dir\src\shader.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\shader.cpp > CMakeFiles\Inferno.dir\src\shader.cpp.i
 
 CMakeFiles/Inferno.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/shader.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\shader.cpp -o CMakeFiles\Inferno.dir\src\shader.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\shader.cpp -o CMakeFiles\Inferno.dir\src\shader.cpp.s
 
 CMakeFiles/Inferno.dir/src/camera.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/camera.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/camera.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/camera.cpp
+CMakeFiles/Inferno.dir/src/camera.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/camera.cpp
 CMakeFiles/Inferno.dir/src/camera.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Inferno.dir/src/camera.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/camera.cpp.obj -MF CMakeFiles\Inferno.dir\src\camera.cpp.obj.d -o CMakeFiles\Inferno.dir\src\camera.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Inferno.dir/src/camera.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/camera.cpp.obj -MF CMakeFiles\Inferno.dir\src\camera.cpp.obj.d -o CMakeFiles\Inferno.dir\src\camera.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\camera.cpp
 
 CMakeFiles/Inferno.dir/src/camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/camera.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\camera.cpp > CMakeFiles\Inferno.dir\src\camera.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\camera.cpp > CMakeFiles\Inferno.dir\src\camera.cpp.i
 
 CMakeFiles/Inferno.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/camera.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\camera.cpp -o CMakeFiles\Inferno.dir\src\camera.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\camera.cpp -o CMakeFiles\Inferno.dir\src\camera.cpp.s
 
 CMakeFiles/Inferno.dir/src/q_math.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/q_math.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/q_math.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/q_math.cpp
+CMakeFiles/Inferno.dir/src/q_math.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/q_math.cpp
 CMakeFiles/Inferno.dir/src/q_math.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Inferno.dir/src/q_math.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/q_math.cpp.obj -MF CMakeFiles\Inferno.dir\src\q_math.cpp.obj.d -o CMakeFiles\Inferno.dir\src\q_math.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\q_math.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Inferno.dir/src/q_math.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/q_math.cpp.obj -MF CMakeFiles\Inferno.dir\src\q_math.cpp.obj.d -o CMakeFiles\Inferno.dir\src\q_math.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\q_math.cpp
 
 CMakeFiles/Inferno.dir/src/q_math.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/q_math.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\q_math.cpp > CMakeFiles\Inferno.dir\src\q_math.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\q_math.cpp > CMakeFiles\Inferno.dir\src\q_math.cpp.i
 
 CMakeFiles/Inferno.dir/src/q_math.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/q_math.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\q_math.cpp -o CMakeFiles\Inferno.dir\src\q_math.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\q_math.cpp -o CMakeFiles\Inferno.dir\src\q_math.cpp.s
 
 CMakeFiles/Inferno.dir/src/maze.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/maze.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/maze.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/maze.cpp
+CMakeFiles/Inferno.dir/src/maze.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/maze.cpp
 CMakeFiles/Inferno.dir/src/maze.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Inferno.dir/src/maze.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/maze.cpp.obj -MF CMakeFiles\Inferno.dir\src\maze.cpp.obj.d -o CMakeFiles\Inferno.dir\src\maze.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\maze.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Inferno.dir/src/maze.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/maze.cpp.obj -MF CMakeFiles\Inferno.dir\src\maze.cpp.obj.d -o CMakeFiles\Inferno.dir\src\maze.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\maze.cpp
 
 CMakeFiles/Inferno.dir/src/maze.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/maze.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\maze.cpp > CMakeFiles\Inferno.dir\src\maze.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\maze.cpp > CMakeFiles\Inferno.dir\src\maze.cpp.i
 
 CMakeFiles/Inferno.dir/src/maze.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/maze.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\maze.cpp -o CMakeFiles\Inferno.dir\src\maze.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\maze.cpp -o CMakeFiles\Inferno.dir\src\maze.cpp.s
 
 CMakeFiles/Inferno.dir/src/engine.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/engine.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/engine.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/engine.cpp
+CMakeFiles/Inferno.dir/src/engine.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/engine.cpp
 CMakeFiles/Inferno.dir/src/engine.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Inferno.dir/src/engine.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/engine.cpp.obj -MF CMakeFiles\Inferno.dir\src\engine.cpp.obj.d -o CMakeFiles\Inferno.dir\src\engine.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Inferno.dir/src/engine.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/engine.cpp.obj -MF CMakeFiles\Inferno.dir\src\engine.cpp.obj.d -o CMakeFiles\Inferno.dir\src\engine.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\engine.cpp
 
 CMakeFiles/Inferno.dir/src/engine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/engine.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\engine.cpp > CMakeFiles\Inferno.dir\src\engine.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\engine.cpp > CMakeFiles\Inferno.dir\src\engine.cpp.i
 
 CMakeFiles/Inferno.dir/src/engine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/engine.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\engine.cpp -o CMakeFiles\Inferno.dir\src\engine.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\engine.cpp -o CMakeFiles\Inferno.dir\src\engine.cpp.s
 
 CMakeFiles/Inferno.dir/src/lighting.cpp.obj: CMakeFiles/Inferno.dir/flags.make
 CMakeFiles/Inferno.dir/src/lighting.cpp.obj: CMakeFiles/Inferno.dir/includes_CXX.rsp
-CMakeFiles/Inferno.dir/src/lighting.cpp.obj: C:/Users/deanp/OneDrive/Documents/Maze/src/lighting.cpp
+CMakeFiles/Inferno.dir/src/lighting.cpp.obj: C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/lighting.cpp
 CMakeFiles/Inferno.dir/src/lighting.cpp.obj: CMakeFiles/Inferno.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Inferno.dir/src/lighting.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/lighting.cpp.obj -MF CMakeFiles\Inferno.dir\src\lighting.cpp.obj.d -o CMakeFiles\Inferno.dir\src\lighting.cpp.obj -c C:\Users\deanp\OneDrive\Documents\Maze\src\lighting.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Inferno.dir/src/lighting.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Inferno.dir/src/lighting.cpp.obj -MF CMakeFiles\Inferno.dir\src\lighting.cpp.obj.d -o CMakeFiles\Inferno.dir\src\lighting.cpp.obj -c C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\lighting.cpp
 
 CMakeFiles/Inferno.dir/src/lighting.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Inferno.dir/src/lighting.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\Maze\src\lighting.cpp > CMakeFiles\Inferno.dir\src\lighting.cpp.i
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\lighting.cpp > CMakeFiles\Inferno.dir\src\lighting.cpp.i
 
 CMakeFiles/Inferno.dir/src/lighting.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Inferno.dir/src/lighting.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\Maze\src\lighting.cpp -o CMakeFiles\Inferno.dir\src\lighting.cpp.s
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\lighting.cpp -o CMakeFiles\Inferno.dir\src\lighting.cpp.s
 
 # Object files for target Inferno
 Inferno_OBJECTS = \
@@ -215,7 +215,7 @@ Inferno.exe: dependencies/glfw/src/libglfw3.a
 Inferno.exe: CMakeFiles/Inferno.dir/linkLibs.rsp
 Inferno.exe: CMakeFiles/Inferno.dir/objects1.rsp
 Inferno.exe: CMakeFiles/Inferno.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Inferno.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Inferno.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Inferno.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -227,6 +227,6 @@ CMakeFiles/Inferno.dir/clean:
 .PHONY : CMakeFiles/Inferno.dir/clean
 
 CMakeFiles/Inferno.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\deanp\OneDrive\Documents\Maze C:\Users\deanp\OneDrive\Documents\Maze C:\Users\deanp\OneDrive\Documents\Maze\build C:\Users\deanp\OneDrive\Documents\Maze\build C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles\Inferno.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\deanp\OneDrive\Documents\VoxelEngine C:\Users\deanp\OneDrive\Documents\VoxelEngine C:\Users\deanp\OneDrive\Documents\VoxelEngine\build C:\Users\deanp\OneDrive\Documents\VoxelEngine\build C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles\Inferno.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/Inferno.dir/depend
 

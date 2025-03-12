@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\Maze
+CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\Maze\build
+CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -131,9 +131,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles C:\Users\deanp\OneDrive\Documents\Maze\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -161,17 +161,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Inferno
+# Target rules for targets named VoxelEngine
 
 # Build rule for target.
-Inferno: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Inferno
-.PHONY : Inferno
+VoxelEngine: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 VoxelEngine
+.PHONY : VoxelEngine
 
 # fast build rule for target.
-Inferno/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/build
-.PHONY : Inferno/fast
+VoxelEngine/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/build
+.PHONY : VoxelEngine/fast
 
 #=============================================================================
 # Target rules for targets named uninstall
@@ -217,7 +217,7 @@ src/camera.obj: src/camera.cpp.obj
 
 # target to build an object file
 src/camera.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/camera.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/camera.cpp.obj
 .PHONY : src/camera.cpp.obj
 
 src/camera.i: src/camera.cpp.i
@@ -225,7 +225,7 @@ src/camera.i: src/camera.cpp.i
 
 # target to preprocess a source file
 src/camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/camera.cpp.i
 .PHONY : src/camera.cpp.i
 
 src/camera.s: src/camera.cpp.s
@@ -233,7 +233,7 @@ src/camera.s: src/camera.cpp.s
 
 # target to generate assembly for a file
 src/camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
 src/engine.obj: src/engine.cpp.obj
@@ -241,7 +241,7 @@ src/engine.obj: src/engine.cpp.obj
 
 # target to build an object file
 src/engine.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/engine.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/engine.cpp.obj
 .PHONY : src/engine.cpp.obj
 
 src/engine.i: src/engine.cpp.i
@@ -249,7 +249,7 @@ src/engine.i: src/engine.cpp.i
 
 # target to preprocess a source file
 src/engine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/engine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/engine.cpp.i
 .PHONY : src/engine.cpp.i
 
 src/engine.s: src/engine.cpp.s
@@ -257,7 +257,7 @@ src/engine.s: src/engine.cpp.s
 
 # target to generate assembly for a file
 src/engine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/engine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/engine.cpp.s
 .PHONY : src/engine.cpp.s
 
 src/glad.obj: src/glad.c.obj
@@ -265,7 +265,7 @@ src/glad.obj: src/glad.c.obj
 
 # target to build an object file
 src/glad.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/glad.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/glad.c.obj
 .PHONY : src/glad.c.obj
 
 src/glad.i: src/glad.c.i
@@ -273,7 +273,7 @@ src/glad.i: src/glad.c.i
 
 # target to preprocess a source file
 src/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/glad.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/glad.c.i
 .PHONY : src/glad.c.i
 
 src/glad.s: src/glad.c.s
@@ -281,39 +281,15 @@ src/glad.s: src/glad.c.s
 
 # target to generate assembly for a file
 src/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/glad.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/glad.c.s
 .PHONY : src/glad.c.s
-
-src/lighting.obj: src/lighting.cpp.obj
-.PHONY : src/lighting.obj
-
-# target to build an object file
-src/lighting.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/lighting.cpp.obj
-.PHONY : src/lighting.cpp.obj
-
-src/lighting.i: src/lighting.cpp.i
-.PHONY : src/lighting.i
-
-# target to preprocess a source file
-src/lighting.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/lighting.cpp.i
-.PHONY : src/lighting.cpp.i
-
-src/lighting.s: src/lighting.cpp.s
-.PHONY : src/lighting.s
-
-# target to generate assembly for a file
-src/lighting.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/lighting.cpp.s
-.PHONY : src/lighting.cpp.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
 # target to build an object file
 src/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/main.cpp.obj
 .PHONY : src/main.cpp.obj
 
 src/main.i: src/main.cpp.i
@@ -321,7 +297,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -329,39 +305,15 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
-
-src/maze.obj: src/maze.cpp.obj
-.PHONY : src/maze.obj
-
-# target to build an object file
-src/maze.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/maze.cpp.obj
-.PHONY : src/maze.cpp.obj
-
-src/maze.i: src/maze.cpp.i
-.PHONY : src/maze.i
-
-# target to preprocess a source file
-src/maze.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/maze.cpp.i
-.PHONY : src/maze.cpp.i
-
-src/maze.s: src/maze.cpp.s
-.PHONY : src/maze.s
-
-# target to generate assembly for a file
-src/maze.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/maze.cpp.s
-.PHONY : src/maze.cpp.s
 
 src/q_math.obj: src/q_math.cpp.obj
 .PHONY : src/q_math.obj
 
 # target to build an object file
 src/q_math.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/q_math.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/q_math.cpp.obj
 .PHONY : src/q_math.cpp.obj
 
 src/q_math.i: src/q_math.cpp.i
@@ -369,7 +321,7 @@ src/q_math.i: src/q_math.cpp.i
 
 # target to preprocess a source file
 src/q_math.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/q_math.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/q_math.cpp.i
 .PHONY : src/q_math.cpp.i
 
 src/q_math.s: src/q_math.cpp.s
@@ -377,15 +329,39 @@ src/q_math.s: src/q_math.cpp.s
 
 # target to generate assembly for a file
 src/q_math.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/q_math.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/q_math.cpp.s
 .PHONY : src/q_math.cpp.s
+
+src/renderer.obj: src/renderer.cpp.obj
+.PHONY : src/renderer.obj
+
+# target to build an object file
+src/renderer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/renderer.cpp.obj
+.PHONY : src/renderer.cpp.obj
+
+src/renderer.i: src/renderer.cpp.i
+.PHONY : src/renderer.i
+
+# target to preprocess a source file
+src/renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/renderer.cpp.i
+.PHONY : src/renderer.cpp.i
+
+src/renderer.s: src/renderer.cpp.s
+.PHONY : src/renderer.s
+
+# target to generate assembly for a file
+src/renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/renderer.cpp.s
+.PHONY : src/renderer.cpp.s
 
 src/shader.obj: src/shader.cpp.obj
 .PHONY : src/shader.obj
 
 # target to build an object file
 src/shader.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/shader.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/shader.cpp.obj
 .PHONY : src/shader.cpp.obj
 
 src/shader.i: src/shader.cpp.i
@@ -393,7 +369,7 @@ src/shader.i: src/shader.cpp.i
 
 # target to preprocess a source file
 src/shader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/shader.cpp.i
 .PHONY : src/shader.cpp.i
 
 src/shader.s: src/shader.cpp.s
@@ -401,7 +377,7 @@ src/shader.s: src/shader.cpp.s
 
 # target to generate assembly for a file
 src/shader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Inferno.dir\build.make CMakeFiles/Inferno.dir/src/shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
 
 # Help Target
@@ -418,7 +394,7 @@ help:
 	@echo ... rebuild_cache
 	@echo ... uninstall
 	@echo ... update_mappings
-	@echo ... Inferno
+	@echo ... VoxelEngine
 	@echo ... glfw
 	@echo ... src/camera.obj
 	@echo ... src/camera.i
@@ -429,18 +405,15 @@ help:
 	@echo ... src/glad.obj
 	@echo ... src/glad.i
 	@echo ... src/glad.s
-	@echo ... src/lighting.obj
-	@echo ... src/lighting.i
-	@echo ... src/lighting.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
-	@echo ... src/maze.obj
-	@echo ... src/maze.i
-	@echo ... src/maze.s
 	@echo ... src/q_math.obj
 	@echo ... src/q_math.i
 	@echo ... src/q_math.s
+	@echo ... src/renderer.obj
+	@echo ... src/renderer.i
+	@echo ... src/renderer.s
 	@echo ... src/shader.obj
 	@echo ... src/shader.i
 	@echo ... src/shader.s

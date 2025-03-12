@@ -1,1 +1,1 @@
--IC:/Users/deanp/OneDrive/Documents/Maze/dependencies/glfw/include -IC:/Users/deanp/OneDrive/Documents/Maze/dependencies/glad/include -IC:/Users/deanp/OneDrive/Documents/Maze/dependencies/glm -IC:/Users/deanp/OneDrive/Documents/Maze/dependencies/glm/gtc
+-IC:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/include -IC:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glad/include -IC:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glm -IC:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glm/gtc

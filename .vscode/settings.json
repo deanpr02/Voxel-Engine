@@ -62,6 +62,10 @@
         "string_view": "cpp",
         "iomanip": "cpp",
         "numbers": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "chrono": "cpp",
+        "list": "cpp",
+        "ratio": "cpp",
+        "xhash": "cpp"
     }
 }

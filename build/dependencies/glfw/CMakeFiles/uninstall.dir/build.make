@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\Maze
+CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\Maze\build
+CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine\build
 
 # Utility rule file for uninstall.
 
@@ -66,7 +66,7 @@ include dependencies/glfw/CMakeFiles/uninstall.dir/compiler_depend.make
 include dependencies/glfw/CMakeFiles/uninstall.dir/progress.make
 
 dependencies/glfw/CMakeFiles/uninstall:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build\dependencies\glfw && "C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/deanp/OneDrive/Documents/Maze/build/dependencies/glfw/cmake_uninstall.cmake
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\dependencies\glfw && "C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/deanp/OneDrive/Documents/VoxelEngine/build/dependencies/glfw/cmake_uninstall.cmake
 
 uninstall: dependencies/glfw/CMakeFiles/uninstall
 uninstall: dependencies/glfw/CMakeFiles/uninstall.dir/build.make
@@ -77,10 +77,10 @@ dependencies/glfw/CMakeFiles/uninstall.dir/build: uninstall
 .PHONY : dependencies/glfw/CMakeFiles/uninstall.dir/build
 
 dependencies/glfw/CMakeFiles/uninstall.dir/clean:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build\dependencies\glfw && $(CMAKE_COMMAND) -P CMakeFiles\uninstall.dir\cmake_clean.cmake
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\dependencies\glfw && $(CMAKE_COMMAND) -P CMakeFiles\uninstall.dir\cmake_clean.cmake
 .PHONY : dependencies/glfw/CMakeFiles/uninstall.dir/clean
 
 dependencies/glfw/CMakeFiles/uninstall.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\deanp\OneDrive\Documents\Maze C:\Users\deanp\OneDrive\Documents\Maze\dependencies\glfw C:\Users\deanp\OneDrive\Documents\Maze\build C:\Users\deanp\OneDrive\Documents\Maze\build\dependencies\glfw C:\Users\deanp\OneDrive\Documents\Maze\build\dependencies\glfw\CMakeFiles\uninstall.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\deanp\OneDrive\Documents\VoxelEngine C:\Users\deanp\OneDrive\Documents\VoxelEngine\dependencies\glfw C:\Users\deanp\OneDrive\Documents\VoxelEngine\build C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\dependencies\glfw C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\dependencies\glfw\CMakeFiles\uninstall.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : dependencies/glfw/CMakeFiles/uninstall.dir/depend
 

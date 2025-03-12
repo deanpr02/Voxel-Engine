@@ -30,5 +30,6 @@ struct Shaders {
     Shader s_wall;
     Shader s_floor;
     Shader s_light;
+    Shader s_cube;
 };
 #endif

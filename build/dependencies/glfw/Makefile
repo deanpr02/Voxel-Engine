@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\Maze
+CMAKE_SOURCE_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\Maze\build
+CMAKE_BINARY_DIR = C:\Users\deanp\OneDrive\Documents\VoxelEngine\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -131,14 +131,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles C:\Users\deanp\OneDrive\Documents\Maze\build\dependencies\glfw\\CMakeFiles\progress.marks
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\Maze\build\CMakeFiles 0
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\dependencies\glfw\\CMakeFiles\progress.marks
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\deanp\OneDrive\Documents\VoxelEngine\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/clean
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/clean
 .PHONY : clean
 
 # The main clean target
@@ -147,22 +147,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/preinstall
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/preinstall
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 dependencies/glfw/CMakeFiles/uninstall.dir/rule:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/CMakeFiles/uninstall.dir/rule
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 dependencies/glfw/CMakeFiles/uninstall.dir/rule
 .PHONY : dependencies/glfw/CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -171,7 +171,7 @@ uninstall: dependencies/glfw/CMakeFiles/uninstall.dir/rule
 
 # fast build rule for target.
 uninstall/fast:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(MAKE) $(MAKESILENT) -f dependencies\glfw\CMakeFiles\uninstall.dir\build.make dependencies/glfw/CMakeFiles/uninstall.dir/build
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(MAKE) $(MAKESILENT) -f dependencies\glfw\CMakeFiles\uninstall.dir\build.make dependencies/glfw/CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
 # Help Target
@@ -198,6 +198,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d C:\Users\deanp\OneDrive\Documents\Maze\build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Users\deanp\OneDrive\Documents\VoxelEngine\build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

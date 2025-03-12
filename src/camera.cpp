@@ -7,12 +7,12 @@ const float EDGE_STEP = 0.1f;
 Camera::Camera()
 {
     //camera attributes
-    _pos = glm::vec3(0.0f,0.0f,3.0f);
-    _direction = qtn::Quaternion(0,0,0,-1.0f);
+    _pos = glm::vec3(0.0f,0.0f,-3.0f);
+    _direction = qtn::Quaternion(0,0,0,1.0f);
     _up = glm::vec3(0,1.0f,0);
     _right = glm::vec3(1.0f,0.0f,0.0f);
     //globals
-    _forward = qtn::Quaternion(0,0,0,-1.0f);
+    _forward = qtn::Quaternion(0,0,0,1.0f);
     _globalUp = glm::vec3(0,1.0f,0);
     //measures of rotations
     _horizontal = 0;
