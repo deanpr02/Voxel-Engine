@@ -8,16 +8,17 @@
 #include <GL/gl.h>
 #include "shader.h"
 #include "camera.h"
+#include "block.h"
+#include "chunk_manager.h"
 
 extern Shaders _shaders;
 
+
 class Renderer{
     public:
-    unsigned int _vbo;
-    unsigned int _vao;
-    unsigned int _ebo;
+    Chunk* _chunk = new Chunk();
 
-    void initializeBuffer();
+    void initializeBuffer(Chunk);
     void drawCube(float,float,float);
     void drawWorld(Camera);
     void loadShaders();

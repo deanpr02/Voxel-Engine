@@ -236,6 +236,30 @@ src/camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/camera.cpp.s
 .PHONY : src/camera.cpp.s
 
+src/chunk_manager.obj: src/chunk_manager.cpp.obj
+.PHONY : src/chunk_manager.obj
+
+# target to build an object file
+src/chunk_manager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/chunk_manager.cpp.obj
+.PHONY : src/chunk_manager.cpp.obj
+
+src/chunk_manager.i: src/chunk_manager.cpp.i
+.PHONY : src/chunk_manager.i
+
+# target to preprocess a source file
+src/chunk_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/chunk_manager.cpp.i
+.PHONY : src/chunk_manager.cpp.i
+
+src/chunk_manager.s: src/chunk_manager.cpp.s
+.PHONY : src/chunk_manager.s
+
+# target to generate assembly for a file
+src/chunk_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/chunk_manager.cpp.s
+.PHONY : src/chunk_manager.cpp.s
+
 src/engine.obj: src/engine.cpp.obj
 .PHONY : src/engine.obj
 
@@ -399,6 +423,9 @@ help:
 	@echo ... src/camera.obj
 	@echo ... src/camera.i
 	@echo ... src/camera.s
+	@echo ... src/chunk_manager.obj
+	@echo ... src/chunk_manager.i
+	@echo ... src/chunk_manager.s
 	@echo ... src/engine.obj
 	@echo ... src/engine.i
 	@echo ... src/engine.s

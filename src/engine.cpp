@@ -10,7 +10,6 @@ void Engine::processInput(GLFWwindow* window){
             _inputMap[key]();
         }
     }
-
 }
 
 void Engine::init(){
