@@ -48,25 +48,10 @@ class Engine{
     static void mouseCallback(GLFWwindow*,double,double);
     static void frameBufferCallback(GLFWwindow*,int,int);
     static void keyCallback(GLFWwindow*,int,int,int,int);
-    void drawMazeWalls();
-    void drawMazePaths();
-    void drawPlayer();
-    void drawObjects();
-    void drawCube();
-    void generateMaze();
-    void configureBuffers();
-    void configureLightBuffers();
     int checkInit();
     void render();
     void loadShaders();
-    void updateLighting();
-    //create the wall and floor game objects for rendering
-    void createObjects();
-    //create the wall
-    void createWall();
-    void createFloor();
     void updateCamera();
-    void spawnPlayer();
     void draw();
 };
 #endif

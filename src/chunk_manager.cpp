@@ -1,26 +1,5 @@
 #include "chunk_manager.h"
 
-/*unsigned int _indices[] = {
-    //front
-    0, 1, 3,
-    1, 2, 3,
-    //right
-    0, 1, 4,
-    0, 5, 4,
-    //left
-    2, 3, 6,
-    6, 3, 7,
-    //top
-    3, 7, 0,
-    0, 7, 5,
-    //bottom
-    1, 2, 6,
-    4, 6, 1,
-    //back
-    5, 4, 7,
-    4, 7, 6
-};*/
-
 Chunk::Chunk(){
     m_blocks = new Block **[CHUNK_SIZE];
     for (int i = 0; i < CHUNK_SIZE; i++) {
