@@ -31,6 +31,16 @@ void Engine::init(){
     glfwSetCursorPosCallback(_window,mouseCallback);
     glfwSetKeyCallback(_window, keyCallback);
     glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    if(_window == NULL){
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+    }
+    glfwMakeContextCurrent(_window);
+    if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+        std::cout << "Failed to initialize GLAD" << std::endl;
+    }
+    glEnable(GL_DEPTH_TEST);
 }
 
 void Engine::frameBufferCallback(GLFWwindow* window, int width, int height){
@@ -77,12 +87,12 @@ int Engine::checkInit(){
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(_window);
+    //glfwMakeContextCurrent(_window);
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
     return 1;
 
 }
@@ -97,14 +107,14 @@ void Engine::updateCamera(){
 }
 
 void Engine::draw(){
-    _vRenderer.drawWorld(_camera);
+    _vRenderer->drawWorld(_camera);
 }
 
 void Engine::render(){
     if(!checkInit()){
         return;
     }
-    _vRenderer.init();
+    //_vRenderer->init();
 
     while(!glfwWindowShouldClose(_window)){
         if(!_gameState){

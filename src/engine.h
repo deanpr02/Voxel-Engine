@@ -24,7 +24,7 @@ typedef std::function<void()> FuncType;
 class Engine{
     public:
     Camera _camera; /* Camera class object that controlling viewable portion of map */
-    Renderer _vRenderer;
+    Renderer* _vRenderer;
     //Player _player;
     std::unordered_map<int,FuncType> _inputMap; /* HashTable holding different game objects and their functions */
     std::set<int> _pressedKeys; /* All the keys currently being pressed during a certain frame */  /* Offset information for the floors for drawing */
@@ -41,6 +41,7 @@ class Engine{
         _firstMouse = true;
         _gameState = true;
         init();
+        _vRenderer = new Renderer();
     }
 
     void processInput(GLFWwindow*);

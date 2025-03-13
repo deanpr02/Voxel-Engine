@@ -16,8 +16,9 @@ extern Shaders _shaders;
 
 class Renderer{
     public:
-    Chunk* _chunk = new Chunk();
+    ChunkManager* chunkManager;
 
+    Renderer();
     void initializeBuffer(Chunk);
     void drawCube(float,float,float);
     void drawWorld(Camera);

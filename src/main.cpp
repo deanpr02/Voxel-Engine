@@ -2,8 +2,8 @@
 
 //Main code runner
 int main(){
-    Engine engine;
-    engine.render();
+    Engine* engine = new Engine();
+    engine->render();
     
     return 0;
 

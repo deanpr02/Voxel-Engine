@@ -66,6 +66,7 @@
         "chrono": "cpp",
         "list": "cpp",
         "ratio": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "xtree": "cpp"
     }
 }

@@ -44,11 +44,11 @@ void Renderer::drawWorld(Camera camera){
     glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
     _shaders.s_cube.setMat4("model",blockSize);
 
-    glBindVertexArray(_chunk->m_vao);
-    glDrawElements(GL_TRIANGLES,_chunk->m_indices.size(),GL_UNSIGNED_INT,0);
+    chunkManager->renderChunks(camera._pos);
 }
 
-void Renderer::init(){
+Renderer::Renderer(){
     this->loadShaders();
-    _chunk->createMesh();
+    chunkManager = new ChunkManager();
 }
+
