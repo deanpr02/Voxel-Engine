@@ -114,7 +114,8 @@ void Chunk::initializeBuffer(){
 }
 
 ChunkManager::ChunkManager(){
-    return;
+    glm::vec3 spawn = glm::vec3(0,-CHUNK_SIZE,0);
+    pollChunks(spawn);
 }
 
 void ChunkManager::generateChunks(){
@@ -128,22 +129,33 @@ void ChunkManager::generateChunks(){
     std::cout<<m_chunks.size();
 }
 
-void ChunkManager::renderChunks(glm::vec3 worldPos){
-    for(int x = -CHUNK_SIZE+worldPos.x; x <= CHUNK_SIZE+worldPos.x; x += CHUNK_SIZE){
-        for(int z = -CHUNK_SIZE+worldPos.z; z <= CHUNK_SIZE+worldPos.z; z += CHUNK_SIZE){
-            glm::vec3 pos = glm::vec3(x,-CHUNK_SIZE,z);
-            auto it = m_chunkStorage.find(pos);
+void ChunkManager::pollChunks(glm::vec3 worldPos){
+    int currentChunkX = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
+    int currentChunkZ = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
+
+    for(int x = -1*(m_renderDistance/2); x <= m_renderDistance/2; x++){
+        for(int z = -1*(m_renderDistance/2); z <= m_renderDistance/2; z++){
+            //need to modify this so we get chunk origin now somewhere within chunk
+            int clampedX = currentChunkX + (x*CHUNK_SIZE);
+            int clampedZ = currentChunkZ + (z*CHUNK_SIZE);
+            glm::vec3 pos = glm::vec3(clampedX,-CHUNK_SIZE,clampedZ);
             
-            if(it != m_chunkStorage.end()){
-                Chunk* chunk = it->second;
-                loadChunk(chunk);
+            //if chunk is already visible, then continue rendering
+            auto vi = m_visibleChunks.find(pos);
+            if(vi == m_visibleChunks.end()){
+                //see if we have already generated chunk before
+                auto ch = m_chunkStorage.find(pos);
+                //generate chunk and store it
+                if(ch != m_chunkStorage.end()){
+                    Chunk* chunk = new Chunk(pos);
+                    m_chunkStorage[pos] = chunk;
+                    m_visibleChunks[pos] = chunk;
+                }
+                else{
+                    m_visibleChunks[pos] = ch->second;
+                }
             }
-            //chunk doesn't exist, generate chunk
-            else{
-                Chunk* chunk = new Chunk(pos);
-                m_chunkStorage[pos] = chunk;
-                loadChunk(chunk);
-            }
+            
         }
     }
     //for(int i = 0; i < m_chunks.size(); i++){
@@ -156,3 +168,17 @@ void ChunkManager::loadChunk(Chunk* chunk){
     glBindVertexArray(chunk->m_vao);
     glDrawElements(GL_TRIANGLES,chunk->m_indices.size(),GL_UNSIGNED_INT,0);
 }
+
+void ChunkManager::renderChunk(Chunk* chunk){
+    glBindVertexArray(chunk->m_vao);
+    glDrawElements(GL_TRIANGLES,chunk->m_indices.size(),GL_UNSIGNED_INT,0);
+}
+
+void ChunkManager::renderChunks(){
+    for(auto it = m_visibleChunks.begin();it != m_visibleChunks.end();it++){
+        Chunk* chunk = it->second;
+        renderChunk(chunk);
+    }
+}
+
+//everytime we move we will need to check to see if new chunks need to be rendered

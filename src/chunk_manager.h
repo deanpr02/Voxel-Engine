@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include "block.h"
 #include <iostream>
-#include <string>
+#include <cmath>
 
 const int CHUNK_SIZE = 16;
 
@@ -60,15 +60,19 @@ class Chunk{
 
 class ChunkManager{
     public:
+    int m_renderDistance = 3;
     std::vector<Chunk*> m_chunks;
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_chunkStorage;
+    std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_visibleChunks; 
 
 
     ChunkManager();
     void generateChunks();
     void generateChunk();
-    void renderChunks(glm::vec3);
+    void pollChunks(glm::vec3);
+    void renderChunks();
     void loadChunk(Chunk*);
+    void renderChunk(Chunk*);
 };
 
 #endif

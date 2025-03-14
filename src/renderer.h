@@ -22,6 +22,7 @@ class Renderer{
     void initializeBuffer(Chunk);
     void drawCube(float,float,float);
     void drawWorld(Camera);
+    void updateChunks(Camera);
     void loadShaders();
     void init();
 

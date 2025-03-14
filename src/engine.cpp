@@ -9,6 +9,7 @@ void Engine::processInput(GLFWwindow* window){
         if(_inputMap.find(key) != _inputMap.end()){
             _inputMap[key]();
         }
+        _vRenderer->updateChunks(_camera);
     }
 }
 
