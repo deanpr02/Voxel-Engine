@@ -16,7 +16,7 @@ extern Shaders _shaders;
 
 class Renderer{
     public:
-    ChunkManager* chunkManager;
+    ChunkManager* m_chunkManager;
 
     Renderer();
     void initializeBuffer(Chunk);

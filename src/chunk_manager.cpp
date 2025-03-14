@@ -139,14 +139,13 @@ void ChunkManager::pollChunks(glm::vec3 worldPos){
             int clampedX = currentChunkX + (x*CHUNK_SIZE);
             int clampedZ = currentChunkZ + (z*CHUNK_SIZE);
             glm::vec3 pos = glm::vec3(clampedX,-CHUNK_SIZE,clampedZ);
-            
             //if chunk is already visible, then continue rendering
             auto vi = m_visibleChunks.find(pos);
             if(vi == m_visibleChunks.end()){
                 //see if we have already generated chunk before
                 auto ch = m_chunkStorage.find(pos);
                 //generate chunk and store it
-                if(ch != m_chunkStorage.end()){
+                if(ch == m_chunkStorage.end()){
                     Chunk* chunk = new Chunk(pos);
                     m_chunkStorage[pos] = chunk;
                     m_visibleChunks[pos] = chunk;

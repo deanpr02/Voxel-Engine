@@ -7,19 +7,19 @@ const float EDGE_STEP = 0.1f;
 Camera::Camera()
 {
     //camera attributes
-    _pos = glm::vec3(0.0f,0.0f,0.0f);
-    _direction = qtn::Quaternion(0,0,0,1.0f);
-    _up = glm::vec3(0,1.0f,0);
-    _right = glm::vec3(1.0f,0.0f,0.0f);
+    m_pos = glm::vec3(0.0f,0.0f,0.0f);
+    m_direction = qtn::Quaternion(0,0,0,1.0f);
+    m_up = glm::vec3(0,1.0f,0);
+    m_right = glm::vec3(1.0f,0.0f,0.0f);
     //globals
-    _forward = qtn::Quaternion(0,0,0,1.0f);
-    _globalUp = glm::vec3(0,1.0f,0);
+    m_forward = qtn::Quaternion(0,0,0,1.0f);
+    m_globalUp = glm::vec3(0,1.0f,0);
     //measures of rotations
-    _horizontal = 0;
-    _vertical = 0;
+    m_horizontal = 0;
+    m_vertical = 0;
     //customs
-    _movementSpeed = MOVEMENT_SPEED;
-    _mouseSensitivity = MOUSE_SENSITIVITY;
+    m_movementSpeed = MOVEMENT_SPEED;
+    m_mouseSensitivity = MOUSE_SENSITIVITY;
 }
 
 
@@ -27,62 +27,62 @@ Camera::Camera()
 //the cameras current position so it moves in an accurate direction
 void Camera::moveCamera(CameraMovement direction, float delta_time)
 {
-    float velocity = _movementSpeed * delta_time;
-    glm::vec3 directionVector = glm::vec3(_direction.i,0,_direction.k);
+    float velocity = m_movementSpeed * delta_time;
+    glm::vec3 directionVector = glm::vec3(m_direction.i,0,m_direction.k);
     if(direction == FORWARD)
     {
-        _pos += directionVector * velocity;
+        m_pos += directionVector * velocity;
     }
     if(direction == BACKWARD)
     {
-        _pos -= directionVector * velocity;
+        m_pos -= directionVector * velocity;
     }
     if(direction == LEFT)
     {
-        _pos -= _right * velocity;
+        m_pos -= m_right * velocity;
     }
     if(direction == RIGHT)
     {
-        _pos += _right * velocity;
+        m_pos += m_right * velocity;
     }
 
 }
 
 void Camera::moveCameraForward(float deltaTime){
-    float velocity = _movementSpeed * deltaTime;
-    glm::vec3 directionVector = glm::vec3(_direction.i,0,_direction.k);
-    _pos += directionVector * velocity;
+    float velocity = m_movementSpeed * deltaTime;
+    glm::vec3 directionVector = glm::vec3(m_direction.i,0,m_direction.k);
+    m_pos += directionVector * velocity;
 }
 
 void Camera::moveCameraBackward(float deltaTime){
-    float velocity = _movementSpeed * deltaTime;
-    glm::vec3 directionVector = glm::vec3(_direction.i,0,_direction.k);
-    _pos -= directionVector * velocity;
+    float velocity = m_movementSpeed * deltaTime;
+    glm::vec3 directionVector = glm::vec3(m_direction.i,0,m_direction.k);
+    m_pos -= directionVector * velocity;
 }
 
 void Camera::moveCameraLeft(float deltaTime){
-    float velocity = _movementSpeed * deltaTime;
-    _pos -= _right * velocity;
+    float velocity = m_movementSpeed * deltaTime;
+    m_pos -= m_right * velocity;
 }
 
 void Camera::moveCameraRight(float deltaTime){
-    float velocity = _movementSpeed * deltaTime;
-    _pos += _right * velocity;
+    float velocity = m_movementSpeed * deltaTime;
+    m_pos += m_right * velocity;
 }
 
 //Adds our offsets to our cameras total horizontal/vertical movement
 void Camera::processMouseMovement(float xoffset, float yoffset, bool constrainPitch=true){
-    xoffset *= _mouseSensitivity;
-    yoffset *= _mouseSensitivity;
-    _horizontal += xoffset;
-    _vertical += yoffset;
+    xoffset *= m_mouseSensitivity;
+    yoffset *= m_mouseSensitivity;
+    m_horizontal += xoffset;
+    m_vertical += yoffset;
     
     if(constrainPitch){
-        if(_vertical > 89.0f){
-            _vertical = 89.0f;
+        if(m_vertical > 89.0f){
+            m_vertical = 89.0f;
         }
-        else if(_vertical < -89.0f){
-            _vertical = -89.0f;
+        else if(m_vertical < -89.0f){
+            m_vertical = -89.0f;
         }
     }
     
@@ -96,20 +96,20 @@ void Camera::processMouseMovement(float xoffset, float yoffset, bool constrainPi
 void Camera::rotateCamera(){
     checkWinBoundaries();
     //convert our angles into radians. Note: we need to use half the angle because we are using quaternions
-    float horiAngle = glm::radians(_horizontal)/2.0f;
-    float vertAngle = glm::radians(_vertical)/2.0f;
+    float horiAngle = glm::radians(m_horizontal)/2.0f;
+    float vertAngle = glm::radians(m_vertical)/2.0f;
     
     qtn::Quaternion hRotation = qtn::Quaternion(cos(horiAngle),0,sin(horiAngle),0);
     qtn::Quaternion vRotation = qtn::Quaternion(cos(vertAngle),sin(vertAngle),0,0);
 
     //combination of horizontal and vertical rotation quaternions
     qtn::Quaternion camRotation = (hRotation*vRotation).normalize();
-    _direction = camRotation*_forward*camRotation.conjugate();
-    _direction = _direction.normalize();
+    m_direction = camRotation*m_forward*camRotation.conjugate();
+    m_direction = m_direction.normalize();
     
     //update our orientation vectors
-    _right = glm::normalize(glm::cross(glm::vec3(_direction.i,_direction.j,_direction.k),_globalUp));
-    _up = glm::normalize(glm::cross(_right,glm::vec3(_direction.i,_direction.j,_direction.k)));
+    m_right = glm::normalize(glm::cross(glm::vec3(m_direction.i,m_direction.j,m_direction.k),m_globalUp));
+    m_up = glm::normalize(glm::cross(m_right,glm::vec3(m_direction.i,m_direction.j,m_direction.k)));
     
 }
 
@@ -118,14 +118,14 @@ void Camera::checkWinBoundaries(){
 }
 
 glm::mat4 Camera::getProjMatrix(){
-    return _projMatrix;
+    return m_projMatrix;
 }
 
 glm::mat4 Camera::getViewMatrix(){
-    return _viewMatrix;
+    return m_viewMatrix;
 }
 
 void Camera::setPlayerSpawn(float spawnX, float spawnZ){
-    _pos.x = spawnX;
-    _pos.z = spawnZ;
+    m_pos.x = spawnX;
+    m_pos.z = spawnZ;
 }

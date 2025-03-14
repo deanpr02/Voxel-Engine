@@ -1,43 +1,43 @@
 #include "engine.h"
 
 void Engine::processInput(GLFWwindow* window){
-    for(int key: _pressedKeys){
+    for(int key: m_pressedKeys){
         if(key == GLFW_KEY_ESCAPE){
-            _gameState = false;
+            m_gameState = false;
             return;
         }
-        if(_inputMap.find(key) != _inputMap.end()){
-            _inputMap[key]();
+        if(m_inputMap.find(key) != m_inputMap.end()){
+            m_inputMap[key]();
         }
-        _vRenderer->updateChunks(_camera);
+        m_renderer->updateChunks(m_camera);
     }
 }
 
 void Engine::init(){
     //change this
-    _camera._projMatrix = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
-    _inputMap = {
-        {GLFW_KEY_W, [this]() {_camera.moveCameraForward(_deltaTime);}},
-        {GLFW_KEY_S, [this]() {_camera.moveCameraBackward(_deltaTime);}},
-        {GLFW_KEY_A, [this]() {_camera.moveCameraLeft(_deltaTime);}},
-        {GLFW_KEY_D, [this]() {_camera.moveCameraRight(_deltaTime);}}
+    m_camera.m_projMatrix = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
+    m_inputMap = {
+        {GLFW_KEY_W, [this]() {m_camera.moveCameraForward(m_deltaTime);}},
+        {GLFW_KEY_S, [this]() {m_camera.moveCameraBackward(m_deltaTime);}},
+        {GLFW_KEY_A, [this]() {m_camera.moveCameraLeft(m_deltaTime);}},
+        {GLFW_KEY_D, [this]() {m_camera.moveCameraRight(m_deltaTime);}}
     };
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    _window = glfwCreateWindow(SCR_WIDTH,SCR_HEIGHT,"Dat Engine",NULL,NULL);
-    glfwSetWindowUserPointer(_window, this);
-    glfwSetFramebufferSizeCallback(_window,frameBufferCallback);
-    glfwSetCursorPosCallback(_window,mouseCallback);
-    glfwSetKeyCallback(_window, keyCallback);
-    glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    m_window = glfwCreateWindow(SCR_WIDTH,SCR_HEIGHT,"Dat Engine",NULL,NULL);
+    glfwSetWindowUserPointer(m_window, this);
+    glfwSetFramebufferSizeCallback(m_window,frameBufferCallback);
+    glfwSetCursorPosCallback(m_window,mouseCallback);
+    glfwSetKeyCallback(m_window, keyCallback);
+    glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    if(_window == NULL){
+    if(m_window == NULL){
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
     }
-    glfwMakeContextCurrent(_window);
+    glfwMakeContextCurrent(m_window);
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
     }
@@ -52,43 +52,43 @@ void Engine::mouseCallback(GLFWwindow* window, double xposIn, double yposIn){
     Engine* engine = static_cast<Engine*>(glfwGetWindowUserPointer(window));
     float xpos = static_cast<float>(xposIn);
     float ypos = static_cast<float>(yposIn);
-    if(engine->_firstMouse){
-        engine->_lastX = xpos;
-        engine->_lastY = ypos;
-        engine->_firstMouse = false;
+    if(engine->m_firstMouse){
+        engine->m_lastX = xpos;
+        engine->m_lastY = ypos;
+        engine->m_firstMouse = false;
     }
-    float xoffset = engine->_lastX - xpos;
+    float xoffset = engine->m_lastX - xpos;
     //this was flipped from engine->lastY to ypos
-    float yoffset = ypos - engine->_lastY;
-    engine->_lastX = xpos;
-    engine->_lastY = ypos;
+    float yoffset = ypos - engine->m_lastY;
+    engine->m_lastX = xpos;
+    engine->m_lastY = ypos;
     
-    engine->_camera.processMouseMovement(xoffset,yoffset,true);
+    engine->m_camera.processMouseMovement(xoffset,yoffset,true);
 }
 
 void Engine::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods){
     Engine* engine = static_cast<Engine*>(glfwGetWindowUserPointer(window));
     if(action == GLFW_PRESS || action == GLFW_REPEAT){
         if(key == GLFW_KEY_LEFT_SHIFT){
-            engine->_camera._movementSpeed = 2.0f;
+            engine->m_camera.m_movementSpeed = 2.0f;
         }
-        engine->_pressedKeys.insert(key);
+        engine->m_pressedKeys.insert(key);
     }
     else if(action == GLFW_RELEASE){
         if(key == GLFW_KEY_LEFT_SHIFT){
-            engine->_camera._movementSpeed = 1.0f;
+            engine->m_camera.m_movementSpeed = 1.0f;
         }
-        engine->_pressedKeys.erase(key);
+        engine->m_pressedKeys.erase(key);
     }
 }
 
 int Engine::checkInit(){
-    if(_window == NULL){
+    if(m_window == NULL){
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
-    //glfwMakeContextCurrent(_window);
+    //glfwMakeContextCurrent(m_window);
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
@@ -102,41 +102,40 @@ int Engine::checkInit(){
 void Engine::updateCamera(){
     //Since our direction is calculated as a quaternion we need to extract ijk components to make a vec3.
     //Our we generate our view matrix using the camera's position, direction from current position, and camera up vec
-    glm::vec3 camDirection = glm::vec3(_camera._direction.i,_camera._direction.j,_camera._direction.k);
-    glm::mat4 view = glm::lookAt(_camera._pos,_camera._pos+camDirection,_camera._up);
-    _camera._viewMatrix = view;
+    glm::vec3 camDirection = glm::vec3(m_camera.m_direction.i,m_camera.m_direction.j,m_camera.m_direction.k);
+    glm::mat4 view = glm::lookAt(m_camera.m_pos,m_camera.m_pos+camDirection,m_camera.m_up);
+    m_camera.m_viewMatrix = view;
 }
 
 void Engine::draw(){
-    _vRenderer->drawWorld(_camera);
+    m_renderer->drawWorld(m_camera);
 }
 
 void Engine::render(){
     if(!checkInit()){
         return;
     }
-    //_vRenderer->init();
-
-    while(!glfwWindowShouldClose(_window)){
-        if(!_gameState){
+    //m_renderer->init();
+    while(!glfwWindowShouldClose(m_window)){
+        if(!m_gameState){
             break;
         }
         float currentFrame = static_cast<float>(glfwGetTime());
-        _deltaTime = currentFrame - _lastFrame;
-        _lastFrame = currentFrame;
+        m_deltaTime = currentFrame - m_lastFrame;
+        m_lastFrame = currentFrame;
 
         glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        //processInput(_window,_gameState);
-        processInput(_window);
+        //processInput(m_window,m_gameState);
+        processInput(m_window);
         updateCamera();
 
         draw();
-        //_vRenderer.drawCube(_camera);
+        //m_renderer.drawCube(m_camera);
         //drawObjects();
         
-        glfwSwapBuffers(_window);
+        glfwSwapBuffers(m_window);
         glfwPollEvents();
     }
     glfwTerminate();

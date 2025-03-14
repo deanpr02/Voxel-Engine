@@ -20,19 +20,19 @@ class Camera
 {
     public:
     //camera variables
-    qtn::Quaternion _direction;
-    qtn::Quaternion _forward;
-    glm::vec3 _globalUp;
-    glm::vec3 _up;
-    glm::vec3 _right;
-    glm::vec3 _pos;
-    float _horizontal;
-    float _vertical;
-    float _tilt;
-    float _movementSpeed;
-    float _mouseSensitivity;
-    glm::mat4 _projMatrix;
-    glm::mat4 _viewMatrix;
+    qtn::Quaternion m_direction;
+    qtn::Quaternion m_forward;
+    glm::vec3 m_globalUp;
+    glm::vec3 m_up;
+    glm::vec3 m_right;
+    glm::vec3 m_pos;
+    float m_horizontal;
+    float m_vertical;
+    float m_tilt;
+    float m_movementSpeed;
+    float m_mouseSensitivity;
+    glm::mat4 m_projMatrix;
+    glm::mat4 m_viewMatrix;
     Camera();
     Camera(float, float, float);
     Camera(float, float, float, float, float, float);

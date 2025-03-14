@@ -37,22 +37,22 @@ void Renderer::loadShaders(){
 }*/
 
 void Renderer::updateChunks(Camera camera){
-    chunkManager->pollChunks(camera._pos);
+    m_chunkManager->pollChunks(camera.m_pos);
 }
 
 void Renderer::drawWorld(Camera camera){
     _shaders.s_cube.use();
-    _shaders.s_cube.setMat4("perspective",camera._projMatrix);
+    _shaders.s_cube.setMat4("perspective",camera.m_projMatrix);
     _shaders.s_cube.setMat4("view",camera.getViewMatrix());
     
     glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
     _shaders.s_cube.setMat4("model",blockSize);
 
-    chunkManager->renderChunks();
+    m_chunkManager->renderChunks();
 }
 
 Renderer::Renderer(){
     this->loadShaders();
-    chunkManager = new ChunkManager();
+    m_chunkManager = new ChunkManager();
 }
 

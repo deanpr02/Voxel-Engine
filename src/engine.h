@@ -9,7 +9,6 @@
 #include "camera.h"
 #include "shader.h"
 #include "renderer.h"
-//#include "block.h"
 #include <vector>
 #include <unordered_map>
 #include <functional>
@@ -23,25 +22,25 @@ typedef std::function<void()> FuncType;
 
 class Engine{
     public:
-    Camera _camera; /* Camera class object that controlling viewable portion of map */
-    Renderer* _vRenderer;
+    Camera m_camera; /* Camera class object that controlling viewable portion of map */
+    Renderer* m_renderer;
     //Player _player;
-    std::unordered_map<int,FuncType> _inputMap; /* HashTable holding different game objects and their functions */
-    std::set<int> _pressedKeys; /* All the keys currently being pressed during a certain frame */  /* Offset information for the floors for drawing */
-    GLFWwindow* _window;    /* Game window */
-    float _lastX;
-    float _lastY;
-    bool _firstMouse;
-    bool _gameState;
-    float _deltaTime = 0.0f;
-    float _lastFrame = 0.0f;
+    std::unordered_map<int,FuncType> m_inputMap; /* HashTable holding different game objects and their functions */
+    std::set<int> m_pressedKeys; /* All the keys currently being pressed during a certain frame */  /* Offset information for the floors for drawing */
+    GLFWwindow* m_window;    /* Game window */
+    float m_lastX;
+    float m_lastY;
+    bool m_firstMouse;
+    bool m_gameState;
+    float m_deltaTime = 0.0f;
+    float m_lastFrame = 0.0f;
     Engine(){
-        _lastX = SCR_WIDTH / 2.0f;
-        _lastY = SCR_HEIGHT / 2.0f;
-        _firstMouse = true;
-        _gameState = true;
+        m_lastX = SCR_WIDTH / 2.0f;
+        m_lastY = SCR_HEIGHT / 2.0f;
+        m_firstMouse = true;
+        m_gameState = true;
         init();
-        _vRenderer = new Renderer();
+        m_renderer = new Renderer();
     }
 
     void processInput(GLFWwindow*);
