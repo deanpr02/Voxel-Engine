@@ -37,7 +37,7 @@ void Renderer::loadShaders(){
 }*/
 
 void Renderer::updateChunks(Camera camera){
-    m_chunkManager->pollChunks(camera.m_pos);
+    m_chunkManager->checkBoundary(camera.m_pos);
 }
 
 void Renderer::drawWorld(Camera camera){

@@ -115,23 +115,26 @@ void Chunk::initializeBuffer(){
 
 ChunkManager::ChunkManager(){
     glm::vec3 spawn = glm::vec3(0,-CHUNK_SIZE,0);
-    pollChunks(spawn);
+    initializeChunks(spawn);
 }
 
-void ChunkManager::generateChunks(){
-    for(int x = -CHUNK_SIZE; x <= CHUNK_SIZE; x+= CHUNK_SIZE){
-        for(int z = -CHUNK_SIZE; z <= CHUNK_SIZE; z+= CHUNK_SIZE){
-            glm::vec3 pos = glm::vec3(x,-CHUNK_SIZE,z);
-            Chunk* chunk = new Chunk(pos);
-            m_chunks.push_back(chunk);
-        }
-    }
-    std::cout<<m_chunks.size();
-}
+//void ChunkManager::generateChunks(){
+//    for(int x = -CHUNK_SIZE; x <= CHUNK_SIZE; x+= CHUNK_SIZE){
+//        for(int z = -CHUNK_SIZE; z <= CHUNK_SIZE; z+= CHUNK_SIZE){
+//            glm::vec3 pos = glm::vec3(x,-CHUNK_SIZE,z);
+//            Chunk* chunk = new Chunk(pos);
+//            m_chunks.push_back(chunk);
+//        }
+//    }
+//    std::cout<<m_chunks.size();
+//}
 
-void ChunkManager::pollChunks(glm::vec3 worldPos){
+
+//still need to remove chunks when out of range. only call this when you cross a chunk boundary
+void ChunkManager::initializeChunks(glm::vec3 worldPos){
     int currentChunkX = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
     int currentChunkZ = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
+    m_currentChunk = glm::vec2(currentChunkX,currentChunkZ);
 
     for(int x = -1*(m_renderDistance/2); x <= m_renderDistance/2; x++){
         for(int z = -1*(m_renderDistance/2); z <= m_renderDistance/2; z++){
@@ -163,9 +166,131 @@ void ChunkManager::pollChunks(glm::vec3 worldPos){
     //}
 }
 
-void ChunkManager::loadChunk(Chunk* chunk){
-    glBindVertexArray(chunk->m_vao);
-    glDrawElements(GL_TRIANGLES,chunk->m_indices.size(),GL_UNSIGNED_INT,0);
+void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChunk){
+    //int xChunk = m_currentChunk.x;
+    //int zChunk = m_currentChunk.y;
+//
+    //int newXChunk = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
+    //int newZChunk = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
+    std::cout<<m_visibleChunks.size();
+    int loadDiaX,unloadDiaX;
+    int loadDiaZ,unloadDiaZ;
+    //check if x changed
+    if(newXChunk < xChunk){
+        int loadX = newXChunk;
+        int unloadX = newXChunk + 2*CHUNK_SIZE;
+        loadDiaX = loadX;
+        unloadDiaX = unloadX;
+
+        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+            glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
+            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk-(i*CHUNK_SIZE));
+            loadChunk(chunkToLoad);
+            unloadChunk(chunkToUnload);
+        }
+        //glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk);
+        //glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk);
+        //Chunk* chunkToUnload = new Chunk(glm::vec3(unloadX,-CHUNK_SIZE,zChunk));
+    }
+    else if(newXChunk > xChunk){
+        int loadX = newXChunk;
+        int unloadX = newXChunk - 2*CHUNK_SIZE;
+        loadDiaX = loadX;
+        unloadDiaX = unloadX;
+
+        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+            glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
+            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk-(i*CHUNK_SIZE));
+            loadChunk(chunkToLoad);
+            unloadChunk(chunkToUnload);
+        }
+        //glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk);
+        //glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk);
+        //loadChunk(chunkToLoad);
+        //unloadChunk(chunkToUnload);
+    }
+
+    //check if z changed
+    if(newZChunk < zChunk){
+        int loadZ = newZChunk;
+        int unloadZ = newZChunk + 2*CHUNK_SIZE;
+        loadDiaZ = loadZ;
+        unloadDiaZ = unloadZ;
+
+        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+            glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,loadZ);
+            glm::vec3 chunkToUnload = glm::vec3(xChunk-(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
+            loadChunk(chunkToLoad);
+            unloadChunk(chunkToUnload);
+        }
+        //glm::vec3 chunkToLoad = glm::vec3(xChunk,-CHUNK_SIZE,loadZ);
+        //glm::vec3 chunkToUnload = glm::vec3(xChunk,-CHUNK_SIZE,unloadZ);
+        //loadChunk(chunkToLoad);
+        //unloadChunk(chunkToUnload);
+    }
+    else if(newZChunk > zChunk){
+        int loadZ = newZChunk;
+        int unloadZ = newZChunk - 2*CHUNK_SIZE;
+        //loadDiaZ = loadZ;
+        //unloadDiaZ = unloadZ;
+
+        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+            glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,loadZ);
+            glm::vec3 chunkToUnload = glm::vec3(xChunk-(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
+            loadChunk(chunkToLoad);
+            unloadChunk(chunkToUnload);
+        }
+        //glm::vec3 chunkToLoad = glm::vec3(xChunk,-CHUNK_SIZE,loadZ);
+        //glm::vec3 chunkToUnload = glm::vec3(xChunk,-CHUNK_SIZE,unloadZ);
+        //loadChunk(chunkToLoad);
+        //unloadChunk(chunkToUnload);
+    }
+
+    //check if both have changed
+    //if(xChunk != newXChunk && zChunk != newZChunk){
+    //    glm::vec3 chunkToLoad = glm::vec3(loadDiaX,-CHUNK_SIZE,loadDiaZ);
+    //    glm::vec3 chunkToUnload = glm::vec3(unloadDiaX,-CHUNK_SIZE,unloadDiaZ);
+    //    loadChunk(chunkToLoad);
+    //    unloadChunk(chunkToUnload);
+    //}
+
+}
+
+void ChunkManager::loadChunk(glm::vec3 chunkPos){
+    auto it = m_chunkStorage.find(chunkPos);
+    if(it != m_chunkStorage.end()){
+        m_visibleChunks[chunkPos] = it->second;
+    }
+    else{
+        Chunk* chunk = new Chunk(chunkPos);
+        m_chunkStorage[chunkPos] = chunk;
+        m_visibleChunks[chunkPos] = chunk;
+    }
+}
+
+void ChunkManager::unloadChunk(glm::vec3 chunkPos){
+    m_visibleChunks.erase(chunkPos);
+}
+
+void ChunkManager::checkBoundary(glm::vec3 worldPos){
+    int chunkX = m_currentChunk.x;
+    int chunkZ = m_currentChunk.y;
+    int newXChunk = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
+    int newZChunk = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
+    bool isNewChunk = false;
+
+    if(m_currentChunk.x != newXChunk){
+        m_currentChunk.x = newXChunk;
+        isNewChunk = true;
+    }
+    if(m_currentChunk.y != newZChunk){
+        m_currentChunk.y = newZChunk;
+        isNewChunk = true;
+    }
+    
+    if(isNewChunk){
+        pollChunks(chunkX,chunkZ,newXChunk,newZChunk);
+    }
 }
 
 void ChunkManager::renderChunk(Chunk* chunk){

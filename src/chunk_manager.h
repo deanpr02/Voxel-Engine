@@ -61,7 +61,7 @@ class Chunk{
 class ChunkManager{
     public:
     int m_renderDistance = 3;
-    std::vector<Chunk*> m_chunks;
+    glm::vec2 m_currentChunk;
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_chunkStorage;
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_visibleChunks; 
 
@@ -69,10 +69,14 @@ class ChunkManager{
     ChunkManager();
     void generateChunks();
     void generateChunk();
-    void pollChunks(glm::vec3);
+    void initializeChunks(glm::vec3);
+    //void pollChunks(glm::vec3);
+    void pollChunks(int,int,int,int);
     void renderChunks();
-    void loadChunk(Chunk*);
+    void loadChunk(glm::vec3);
+    void unloadChunk(glm::vec3);
     void renderChunk(Chunk*);
+    void checkBoundary(glm::vec3);
 };
 
 #endif
