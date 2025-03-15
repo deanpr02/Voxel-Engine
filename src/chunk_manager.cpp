@@ -167,92 +167,58 @@ void ChunkManager::initializeChunks(glm::vec3 worldPos){
 }
 
 void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChunk){
-    //int xChunk = m_currentChunk.x;
-    //int zChunk = m_currentChunk.y;
-//
-    //int newXChunk = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
-    //int newZChunk = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
-    std::cout<<m_visibleChunks.size();
-    int loadDiaX,unloadDiaX;
-    int loadDiaZ,unloadDiaZ;
     //check if x changed
     if(newXChunk < xChunk){
-        int loadX = newXChunk;
-        int unloadX = newXChunk + 2*CHUNK_SIZE;
-        loadDiaX = loadX;
-        unloadDiaX = unloadX;
+        int loadX = newXChunk - CHUNK_SIZE;
+        int unloadX = xChunk + CHUNK_SIZE;
 
-        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+        for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
             glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
-            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk-(i*CHUNK_SIZE));
+            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
-        //glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk);
-        //glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk);
-        //Chunk* chunkToUnload = new Chunk(glm::vec3(unloadX,-CHUNK_SIZE,zChunk));
     }
     else if(newXChunk > xChunk){
-        int loadX = newXChunk;
-        int unloadX = newXChunk - 2*CHUNK_SIZE;
-        loadDiaX = loadX;
-        unloadDiaX = unloadX;
+        int loadX = newXChunk + CHUNK_SIZE;
+        int unloadX = xChunk - CHUNK_SIZE;
 
-        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+        for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
             glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
-            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk-(i*CHUNK_SIZE));
+            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
-        //glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk);
-        //glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk);
-        //loadChunk(chunkToLoad);
-        //unloadChunk(chunkToUnload);
+        
     }
 
     //check if z changed
     if(newZChunk < zChunk){
-        int loadZ = newZChunk;
-        int unloadZ = newZChunk + 2*CHUNK_SIZE;
-        loadDiaZ = loadZ;
-        unloadDiaZ = unloadZ;
+        int loadZ = newZChunk - CHUNK_SIZE;
+        int unloadZ = zChunk + CHUNK_SIZE;
 
-        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+        for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
             glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,loadZ);
-            glm::vec3 chunkToUnload = glm::vec3(xChunk-(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
+            glm::vec3 chunkToUnload = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
-        //glm::vec3 chunkToLoad = glm::vec3(xChunk,-CHUNK_SIZE,loadZ);
-        //glm::vec3 chunkToUnload = glm::vec3(xChunk,-CHUNK_SIZE,unloadZ);
-        //loadChunk(chunkToLoad);
-        //unloadChunk(chunkToUnload);
+        
     }
     else if(newZChunk > zChunk){
-        int loadZ = newZChunk;
-        int unloadZ = newZChunk - 2*CHUNK_SIZE;
-        //loadDiaZ = loadZ;
-        //unloadDiaZ = unloadZ;
+        int loadZ = newZChunk + CHUNK_SIZE;
+        int unloadZ = zChunk - CHUNK_SIZE;
+        
 
-        for(int i=-1*(m_renderDistance/2);i<m_renderDistance/2;i++){
+        for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
             glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,loadZ);
-            glm::vec3 chunkToUnload = glm::vec3(xChunk-(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
+            glm::vec3 chunkToUnload = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
-        //glm::vec3 chunkToLoad = glm::vec3(xChunk,-CHUNK_SIZE,loadZ);
-        //glm::vec3 chunkToUnload = glm::vec3(xChunk,-CHUNK_SIZE,unloadZ);
-        //loadChunk(chunkToLoad);
-        //unloadChunk(chunkToUnload);
+        
     }
 
-    //check if both have changed
-    //if(xChunk != newXChunk && zChunk != newZChunk){
-    //    glm::vec3 chunkToLoad = glm::vec3(loadDiaX,-CHUNK_SIZE,loadDiaZ);
-    //    glm::vec3 chunkToUnload = glm::vec3(unloadDiaX,-CHUNK_SIZE,unloadDiaZ);
-    //    loadChunk(chunkToLoad);
-    //    unloadChunk(chunkToUnload);
-    //}
 
 }
 
@@ -289,6 +255,7 @@ void ChunkManager::checkBoundary(glm::vec3 worldPos){
     }
     
     if(isNewChunk){
+        std::cout<<"x: " << worldPos.x << "z: " << worldPos.z << std::endl;
         pollChunks(chunkX,chunkZ,newXChunk,newZChunk);
     }
 }
