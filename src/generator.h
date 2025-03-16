@@ -41,7 +41,7 @@ class ProceduralGenerator{
     int s = 123456;
     int octaves = 4;
     float persistence = 0.5;
-    float lacunarity = 2.0;
+    float lacunarity = 1.8;
 
     public:
     PerlinNoise* m_noiseGenerator;
