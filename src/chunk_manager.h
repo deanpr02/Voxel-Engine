@@ -14,8 +14,11 @@
 #include "block.h"
 #include <iostream>
 #include <cmath>
+#include "generator.h"
 
 const int CHUNK_SIZE = 16;
+const int CHUNK_WIDTH = 16;
+const int CHUNK_HEIGHT = 64;
 
 struct Vec3Hash {
     size_t operator()(const glm::vec3& v) const {
@@ -64,13 +67,16 @@ class ChunkManager{
     glm::vec2 m_currentChunk;
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_chunkStorage;
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_visibleChunks; 
+    ProceduralGenerator* m_generator;
 
 
     ChunkManager();
+    void createChunkMesh(Chunk*,glm::vec3);
     void generateChunks();
-    void generateChunk();
+    std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> getHeightMap(glm::vec3);
+    //void generateChunk();
+    Chunk* generateChunk(glm::vec3);
     void initializeChunks(glm::vec3);
-    //void pollChunks(glm::vec3);
     void pollChunks(int,int,int,int);
     void renderChunks();
     void loadChunk(glm::vec3);

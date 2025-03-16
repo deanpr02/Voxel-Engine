@@ -13,31 +13,35 @@ Chunk::Chunk(){
     //createMesh();
 }
 
+
+//change blocks[i] to new *[CHUNK_HEIGHT] and change j loop to CHUNK_HEIGHT
 Chunk::Chunk(glm::vec3 position){
     m_blocks = new Block **[CHUNK_SIZE];
     for (int i = 0; i < CHUNK_SIZE; i++) {
-        m_blocks[i] = new Block *[CHUNK_SIZE];
-        for (int j = 0; j < CHUNK_SIZE; j++) {
+        m_blocks[i] = new Block *[CHUNK_HEIGHT];
+        for (int j = 0; j < CHUNK_HEIGHT; j++) {
             m_blocks[i][j] = new Block[CHUNK_SIZE];
         }
     }
     m_worldPos = position;
-    createMesh();
+    //createMesh();
 }
 
-void Chunk::createMesh(){
-    for(int x = 0; x < CHUNK_SIZE; x++){
-        for(int y = 0; y < CHUNK_SIZE; y++){
-            for(int z = 0; z < CHUNK_SIZE; z++){
-                if(m_blocks[x][y][z].m_active == false){
-                    continue;
-                }
-                createCube(x,y,z);
-            }
-        }
-    }
-    initializeBuffer();
-}
+//void Chunk::createMesh(){
+//    for(int x = 0; x < CHUNK_SIZE; x++){
+//        for(int y = 0; y < CHUNK_HEIGHT; y++){
+//            for(int z = 0; z < CHUNK_SIZE; z++){
+//                //get noise value which will be height map value;
+//
+//                if(m_blocks[x][y][z].m_active == false){
+//                    continue;
+//                }
+//                createCube(x,y,z);
+//            }
+//        }
+//    }
+//    initializeBuffer();
+//}
 
 void Chunk::createCube(float x, float y, float z){
     glm::vec3 p0 = glm::vec3(m_worldPos.x+x-BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z-BLOCK_SIZE); //front-bottom-left
@@ -114,8 +118,52 @@ void Chunk::initializeBuffer(){
 }
 
 ChunkManager::ChunkManager(){
-    glm::vec3 spawn = glm::vec3(0,-CHUNK_SIZE,0);
+    glm::vec3 spawn = glm::vec3(0,-CHUNK_HEIGHT,0);
+    m_generator = new ProceduralGenerator();
+    
     initializeChunks(spawn);
+}
+
+//maybe change where i pass the heightmap into the chunk constructor itself
+void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
+    std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap = getHeightMap(worldPos);
+    for(int x = 0; x < CHUNK_SIZE; x++){
+        for(int y = 0; y < CHUNK_HEIGHT; y++){
+            for(int z = 0; z < CHUNK_SIZE; z++){
+                //get noise value which will be height map value; currently we are using z as 0 since y values wont alter
+                //float xPos = worldPos.x + x;
+                //float zPos = worldPos.z + z;
+                //float mappedHeight = m_generator->generate(xPos,zPos,0);
+                //std::cout<<"x: "<<xPos<<"z: "<<zPos<<std::endl;
+                //if(y > std::floor(mappedHeight * CHUNK_HEIGHT)){
+                    //chunk->m_blocks[x][y][z].m_active = false;
+                //}
+                if(chunk->m_blocks[x][y][z].m_active == false){
+                    continue;
+                }
+                chunk->createCube(x,y,z);
+            }
+        }
+    }
+    chunk->initializeBuffer();
+}
+
+Chunk* ChunkManager::generateChunk(glm::vec3 worldPos){
+    Chunk* generatedChunk = new Chunk(worldPos);
+    createChunkMesh(generatedChunk,worldPos);
+    return generatedChunk;
+}
+
+
+std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMap(glm::vec3 worldPos){
+    for(int x = 0; x < CHUNK_WIDTH; x++){
+        for(int z = 0; z < CHUNK_WIDTH; z++){
+            float xPos = (worldPos.x + x)/CHUNK_WIDTH;
+            float zPos = (worldPos.z + z)/CHUNK_WIDTH;
+            float mappedHeight = m_generator->generate(xPos,zPos,0);
+            //std::cout<<"x: " << xPos << "z: " << zPos << std::endl;
+        }
+    }
 }
 
 //void ChunkManager::generateChunks(){
@@ -141,7 +189,7 @@ void ChunkManager::initializeChunks(glm::vec3 worldPos){
             //need to modify this so we get chunk origin now somewhere within chunk
             int clampedX = currentChunkX + (x*CHUNK_SIZE);
             int clampedZ = currentChunkZ + (z*CHUNK_SIZE);
-            glm::vec3 pos = glm::vec3(clampedX,-CHUNK_SIZE,clampedZ);
+            glm::vec3 pos = glm::vec3(clampedX,-CHUNK_HEIGHT,clampedZ);
             //if chunk is already visible, then continue rendering
             auto vi = m_visibleChunks.find(pos);
             if(vi == m_visibleChunks.end()){
@@ -149,7 +197,8 @@ void ChunkManager::initializeChunks(glm::vec3 worldPos){
                 auto ch = m_chunkStorage.find(pos);
                 //generate chunk and store it
                 if(ch == m_chunkStorage.end()){
-                    Chunk* chunk = new Chunk(pos);
+                    //Chunk* chunk = new Chunk(pos);
+                    Chunk* chunk = generateChunk(pos);
                     m_chunkStorage[pos] = chunk;
                     m_visibleChunks[pos] = chunk;
                 }
@@ -169,12 +218,13 @@ void ChunkManager::initializeChunks(glm::vec3 worldPos){
 void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChunk){
     //check if x changed
     if(newXChunk < xChunk){
+        //change it to m_renderDistance / 2 * CHUNK_SIZE
         int loadX = newXChunk - CHUNK_SIZE;
         int unloadX = xChunk + CHUNK_SIZE;
 
         for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
-            glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
-            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
+            glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_HEIGHT,zChunk+(i*CHUNK_SIZE));
+            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_HEIGHT,zChunk+(i*CHUNK_SIZE));
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
@@ -184,8 +234,8 @@ void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChu
         int unloadX = xChunk - CHUNK_SIZE;
 
         for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
-            glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
-            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_SIZE,zChunk+(i*CHUNK_SIZE));
+            glm::vec3 chunkToLoad = glm::vec3(loadX,-CHUNK_HEIGHT,zChunk+(i*CHUNK_SIZE));
+            glm::vec3 chunkToUnload = glm::vec3(unloadX,-CHUNK_HEIGHT,zChunk+(i*CHUNK_SIZE));
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
@@ -198,8 +248,8 @@ void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChu
         int unloadZ = zChunk + CHUNK_SIZE;
 
         for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
-            glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,loadZ);
-            glm::vec3 chunkToUnload = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
+            glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_HEIGHT,loadZ);
+            glm::vec3 chunkToUnload = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_HEIGHT,unloadZ);
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
@@ -209,10 +259,9 @@ void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChu
         int loadZ = newZChunk + CHUNK_SIZE;
         int unloadZ = zChunk - CHUNK_SIZE;
         
-
         for(int i=-1*(m_renderDistance/2);i<=m_renderDistance/2;i++){
-            glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,loadZ);
-            glm::vec3 chunkToUnload = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_SIZE,unloadZ);
+            glm::vec3 chunkToLoad = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_HEIGHT,loadZ);
+            glm::vec3 chunkToUnload = glm::vec3(xChunk+(i*CHUNK_SIZE),-CHUNK_HEIGHT,unloadZ);
             loadChunk(chunkToLoad);
             unloadChunk(chunkToUnload);
         }
@@ -228,7 +277,8 @@ void ChunkManager::loadChunk(glm::vec3 chunkPos){
         m_visibleChunks[chunkPos] = it->second;
     }
     else{
-        Chunk* chunk = new Chunk(chunkPos);
+        //Chunk* chunk = new Chunk(chunkPos);
+        Chunk* chunk = generateChunk(chunkPos);
         m_chunkStorage[chunkPos] = chunk;
         m_visibleChunks[chunkPos] = chunk;
     }
@@ -255,7 +305,6 @@ void ChunkManager::checkBoundary(glm::vec3 worldPos){
     }
     
     if(isNewChunk){
-        std::cout<<"x: " << worldPos.x << "z: " << worldPos.z << std::endl;
         pollChunks(chunkX,chunkZ,newXChunk,newZChunk);
     }
 }

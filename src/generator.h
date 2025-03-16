@@ -2,18 +2,20 @@
 #include <cmath>
 #include <algorithm>
 #include <vector>
+#include <cstdint>
 
 class RandomSeed{
     private:
-    long seed;
-    static const long a = 48271;
-    static const long c = 0;
-    static const long m = 2147483647;
+    int64_t seed;
+    const int64_t a = 48271;
+    const int64_t c = 0;
+    const int64_t m = 2147483647;
 
     public:
-    RandomSeed(int);
-    int next();
+    RandomSeed(int s);
+    int Next();
     float nextFloat();
+    void setSeed(long);
 
 };
 
@@ -36,7 +38,7 @@ class PerlinNoise{
 
 class ProceduralGenerator{
     private:
-    int seed = 123456;
+    int s = 123456;
     int octaves = 4;
     float persistence = 0.5;
     float lacunarity = 2.0;

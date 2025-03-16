@@ -4,32 +4,45 @@ RandomSeed::RandomSeed(int s){
     seed = s;
 }
 
-int RandomSeed::next(){
-    seed = (a * seed + c ) % m;
-    return static_cast<int>(seed);
+int RandomSeed::Next(){
+    seed = (a * seed + c) % m;
+    return seed;
 }
 
 float RandomSeed::nextFloat(){
-    return next() / static_cast<float>(m);
+    return Next() / static_cast<float>(m);
+}
+
+void RandomSeed::setSeed(long s){
+    seed = s;
 }
 
 PerlinNoise::PerlinNoise(int seed){
     randomSeed = new RandomSeed(seed);
+    //randomSeed = new RandomSeed(seed);
     permutationTable.resize(tableSize * 2);
     std::vector<int> tempTable(tableSize);
     for(int i = 0; i < tableSize; i++){
         tempTable[i] = i;
     }
-
+    
     for(int i = 0; i < tableSize; i++){
-        int j = randomSeed->next() % tableSize;
+        int j = randomSeed->Next() % tableSize;
+        //std::cout<<"i: "<<i<<"j: "<<j<<std::endl;
         std::swap(tempTable[i],tempTable[j]);
     }
+
+    //for(int i = 0;i<tableSize;i++){
+    //    std::cout<<tempTable[i]<<std::endl;
+    //}
 
     for(int i = 0; i < tableSize; i++){
         permutationTable[i] = tempTable[i];
         permutationTable[tableSize + i] = tempTable[i];
     }
+    //for(int i =0;i<tempTable.size();i++){
+    //    std::cout<<"i: "<<tempTable[i]<<std::endl;
+    //}
 }
 
 float PerlinNoise::fade(float t){
@@ -44,6 +57,7 @@ float PerlinNoise::grad(int hash, float x, float y, float z){
     int h = hash & 15;
     float u = h < 8 ? x : y;
     float v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+    //std::cout<<"3";
     return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 }
 
@@ -51,6 +65,8 @@ float PerlinNoise::noise(float x, float y, float z){
     int X = static_cast<int>(std::floor(x)) & tableSizeMask;
     int Y = static_cast<int>(std::floor(y)) & tableSizeMask;
     int Z = static_cast<int>(std::floor(z)) & tableSizeMask;
+
+    //std::cout<<"x: " << X << "y: " << Y << "z: " << Z << std::endl;
 
     x -= std::floor(x);
     y -= std::floor(y);
@@ -79,6 +95,8 @@ float PerlinNoise::noise(float x, float y, float z){
                     grad(permutationTable[BA+1],x-1,y,z-1)),
                 lerp(u,grad(permutationTable[AB+1],x,y-1,z-1),
                     grad(permutationTable[BB+1],x-1,y-1,z-1))));
+    //std::cout<<res;
+    //std::cout<<"2";
     return (res + 1.0f) / 2.0f;
 }
 
@@ -95,12 +113,18 @@ float PerlinNoise::fractalNoise(float x, float y, float z, int octaves, float pe
         amplitude *= persistence;
         frequency *= lacunarity;
     }
-
+    //std::cout<<"1";
     return total / maxValue;
 }
 
 ProceduralGenerator::ProceduralGenerator(){
-    m_noiseGenerator = new PerlinNoise(seed);
+    //int s = 123456;
+    //int64_t a = 48271;
+    //int64_t c = 0;
+    //int64_t  m = 2147483647;
+    //int64_t test = (a * s + c);
+    //std::cout << "long max: " << std::numeric_limits<long long>::max() << std::endl;
+    m_noiseGenerator = new PerlinNoise(s);
 }
 
 float ProceduralGenerator::generate(float x, float y, float z){
