@@ -70,7 +70,7 @@ void Engine::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
     Engine* engine = static_cast<Engine*>(glfwGetWindowUserPointer(window));
     if(action == GLFW_PRESS || action == GLFW_REPEAT){
         if(key == GLFW_KEY_LEFT_SHIFT){
-            engine->m_camera.m_movementSpeed = 5.0f;
+            engine->m_camera.m_movementSpeed = 15.0f;
         }
         engine->m_pressedKeys.insert(key);
     }

@@ -127,6 +127,7 @@ ChunkManager::ChunkManager(){
 //maybe change where i pass the heightmap into the chunk constructor itself
 void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
     std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap = getHeightMap(worldPos);
+    //std::cout<<heightMap[glm::vec3(16,0,16)]<<std::endl;
     for(int x = 0; x < CHUNK_SIZE; x++){
         for(int y = 0; y < CHUNK_HEIGHT; y++){
             for(int z = 0; z < CHUNK_SIZE; z++){
@@ -163,10 +164,11 @@ Chunk* ChunkManager::generateChunk(glm::vec3 worldPos){
 
 std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMap(glm::vec3 worldPos){
     std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap;
+    //std::cout<<"x: " << worldPos.x << "z: " << worldPos.z<<std::endl;
     for(int x = 0; x < CHUNK_WIDTH; x++){
         for(int z = 0; z < CHUNK_WIDTH; z++){
-            float xPos = (worldPos.x + x)/CHUNK_WIDTH;
-            float zPos = (worldPos.z + z)/CHUNK_WIDTH;
+            float xPos = ((worldPos.x + x))*0.01;
+            float zPos = ((worldPos.z + z))*0.01;
             float mappedHeight = m_generator->generate(xPos,zPos,0);
             //std::cout<<mappedHeight;
             heightMap[glm::vec3(x,0,z)] = mappedHeight;
@@ -175,7 +177,7 @@ std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMa
     }
 
     //for(auto it=heightMap.begin();it!=heightMap.end();it++){
-    //    std::cout<<it->second;
+    //    std::cout<<it->second<<std::endl;
     //}
     return heightMap;
 }
@@ -281,7 +283,7 @@ void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChu
         }
         
     }
-    std::cout<<m_visibleChunks.size();
+    //std::cout<<m_visibleChunks.size();
 
 
 }
