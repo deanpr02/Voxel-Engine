@@ -131,6 +131,7 @@ void Engine::render(){
         //processInput(m_window,m_gameState);
         processInput(m_window);
         updateCamera();
+        m_player->applyGravity();
 
         draw();
         //m_renderer.drawCube(m_camera);

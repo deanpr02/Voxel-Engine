@@ -356,6 +356,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/physics.obj: src/physics.cpp.obj
+.PHONY : src/physics.obj
+
+# target to build an object file
+src/physics.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/physics.cpp.obj
+.PHONY : src/physics.cpp.obj
+
+src/physics.i: src/physics.cpp.i
+.PHONY : src/physics.i
+
+# target to preprocess a source file
+src/physics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/physics.cpp.i
+.PHONY : src/physics.cpp.i
+
+src/physics.s: src/physics.cpp.s
+.PHONY : src/physics.s
+
+# target to generate assembly for a file
+src/physics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/physics.cpp.s
+.PHONY : src/physics.cpp.s
+
 src/q_math.obj: src/q_math.cpp.obj
 .PHONY : src/q_math.obj
 
@@ -462,6 +486,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/physics.obj
+	@echo ... src/physics.i
+	@echo ... src/physics.s
 	@echo ... src/q_math.obj
 	@echo ... src/q_math.i
 	@echo ... src/q_math.s
