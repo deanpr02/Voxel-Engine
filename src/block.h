@@ -12,7 +12,7 @@ class Block{
     //bool isActive();
     //void setActive(bool);
     
-    bool m_active = true;
+    bool m_active = false;
     //BlockType m_blocktype;
 };
 
