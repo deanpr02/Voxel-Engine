@@ -154,6 +154,12 @@ void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
         for(int z = 0; z < CHUNK_SIZE; z++){
             glm::vec3 pos = glm::vec3(x,0,z);
             int height = std::floor((heightMap[pos]*CHUNK_HEIGHT));
+            //if(x == 0 && z == 0){
+            //    height = CHUNK_HEIGHT-1;
+            //}
+            //if(x == 1 && z == 1){
+            //    height = CHUNK_HEIGHT-1;
+            //}
            //std::cout<<height;
             chunk->m_blocks[x][height][z].m_active = true;
             chunk->createCube(x,height,z);
@@ -174,8 +180,8 @@ std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMa
     //std::cout<<"x: " << worldPos.x << "z: " << worldPos.z<<std::endl;
     for(int x = 0; x < CHUNK_WIDTH; x++){
         for(int z = 0; z < CHUNK_WIDTH; z++){
-            float xPos = ((worldPos.x + x))*0.1;
-            float zPos = ((worldPos.z + z))*0.1;
+            float xPos = ((worldPos.x + x + BLOCK_SIZE))*0.1;
+            float zPos = ((worldPos.z + z + BLOCK_SIZE))*0.1;
             float mappedHeight = m_generator->generate(xPos,zPos,0);
             //std::cout<<mappedHeight;
             heightMap[glm::vec3(x,0,z)] = mappedHeight;
@@ -203,8 +209,8 @@ std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMa
 
 //still need to remove chunks when out of range. only call this when you cross a chunk boundary
 void ChunkManager::initializeChunks(glm::vec3 worldPos){
-    int currentChunkX = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
-    int currentChunkZ = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
+    int currentChunkX = std::floor(static_cast<double>(worldPos.x + BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
+    int currentChunkZ = std::floor(static_cast<double>(worldPos.z + BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
     m_currentChunk = glm::vec2(currentChunkX,currentChunkZ);
 
     for(int x = -1*(m_renderDistance/2); x <= m_renderDistance/2; x++){
@@ -315,8 +321,8 @@ void ChunkManager::unloadChunk(glm::vec3 chunkPos){
 void ChunkManager::checkBoundary(glm::vec3 worldPos){
     int chunkX = m_currentChunk.x;
     int chunkZ = m_currentChunk.y;
-    int newXChunk = std::floor(static_cast<double>(worldPos.x)/CHUNK_SIZE)*CHUNK_SIZE;
-    int newZChunk = std::floor(static_cast<double>(worldPos.z)/CHUNK_SIZE)*CHUNK_SIZE;
+    int newXChunk = std::floor(static_cast<double>(worldPos.x + BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
+    int newZChunk = std::floor(static_cast<double>(worldPos.z + BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
     bool isNewChunk = false;
 
     if(m_currentChunk.x != newXChunk){

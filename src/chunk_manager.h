@@ -59,6 +59,7 @@ class Chunk{
     void addVertex(glm::vec3);
     void addTriangle(int,int,int);
     void initializeBuffer();
+    //glm::vec3 getChunkPosition(glm::vec3);
 };
 
 class ChunkManager{

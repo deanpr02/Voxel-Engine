@@ -60,7 +60,7 @@ void Engine::mouseCallback(GLFWwindow* window, double xposIn, double yposIn){
     }
     float xoffset = engine->m_lastX - xpos;
     //this was flipped from engine->lastY to ypos
-    float yoffset = ypos - engine->m_lastY;
+    float yoffset = engine->m_lastY - ypos;
     engine->m_lastX = xpos;
     engine->m_lastY = ypos;
     
@@ -131,9 +131,12 @@ void Engine::render(){
         //processInput(m_window,m_gameState);
         processInput(m_window);
         updateCamera();
-        m_player->applyGravity();
+       // m_player->getChunkPosition(m_camera.m_pos);
+        //m_player->applyGravity(m_renderer->m_chunkManager->m_visibleChunks);
 
         draw();
+
+        m_player->applyGravity(m_renderer->m_chunkManager->m_visibleChunks);
         //m_renderer.drawCube(m_camera);
         //drawObjects();
         
