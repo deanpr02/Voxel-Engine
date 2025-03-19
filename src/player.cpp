@@ -6,7 +6,8 @@ Player::Player(){
         {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
         {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
         {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
-        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}}
+        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}},
+        {GLFW_KEY_SPACE, [this]() {moveBodyUp(m_deltaTime);}}
     };
 
     m_camera = new Camera();
@@ -18,7 +19,8 @@ void Player::init(){
         {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
         {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
         {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
-        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}}
+        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}},
+        {GLFW_KEY_SPACE, [this]() {moveBodyUp(m_deltaTime);}}
     };
 }
 
@@ -29,7 +31,7 @@ void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash
     m_camera->m_viewMatrix = view;
 
     m_currentChunks = chunks;
-    m_body->applyGravity(m_currentChunks);
+    m_body->applyGravity(m_currentChunks,deltaTime);
 }
 
 void Player::processMovement(int key){
@@ -48,7 +50,6 @@ void Player::setMovementSpeed(float speed){
 
 void Player::moveBodyForward(float deltaTime){
     float velocity = m_camera->m_movementSpeed * deltaTime; 
-    std::cout<<deltaTime;
     glm::vec3 forwardVec = glm::vec3(velocity*m_camera->m_direction.i,0,velocity*m_camera->m_direction.k);
     bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,forwardVec);
     if(!isColliding){
@@ -81,4 +82,8 @@ void Player::moveBodyRight(float deltaTime){
     if(!isColliding){
         m_camera->moveCameraRight(deltaTime);
     }
+}
+
+void Player::moveBodyUp(float deltaTime){
+    m_camera->moveCameraUp(m_jumpHeight,deltaTime);
 }

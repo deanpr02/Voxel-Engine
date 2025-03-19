@@ -52,6 +52,11 @@ void Camera::moveCamera(CameraMovement direction, float delta_time)
 
 }
 
+void Camera::moveCameraUp(float jumpHeight,float deltaTime){
+    glm::vec3 upVec = glm::vec3(0,jumpHeight*deltaTime,0);
+    m_pos += upVec;
+}
+
 void Camera::moveCameraForward(float deltaTime){
     float velocity = m_movementSpeed * deltaTime;
     glm::vec3 directionVector = glm::vec3(m_direction.i,0,m_direction.k);

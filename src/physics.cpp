@@ -16,7 +16,7 @@ glm::vec3 PhysicsObject::getChunkPosition(glm::vec3 worldPos){
 }
 
 
-void PhysicsObject::applyGravity(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks){
+void PhysicsObject::applyGravity(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks,float deltaTime){
     glm::vec3 grav = glm::vec3(0,GRAVITY,0);
     int chunkX = std::floor(static_cast<double>(m_position->x+BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
     int chunkZ = std::floor(static_cast<double>(m_position->z+BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
@@ -30,7 +30,11 @@ void PhysicsObject::applyGravity(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Ve
     Chunk* currentChunk = chunks[glm::vec3(chunkX,-CHUNK_HEIGHT,chunkZ)];
     
     if(currentChunk->m_blocks[x][y][z].m_active == false){
-        m_position->y += GRAVITY;
+        m_fallSpeed = m_fallSpeed < TERMINAL_VELOCITY ? m_fallSpeed + GRAVITY : m_fallSpeed;
+        m_position->y -= m_fallSpeed*deltaTime;
+    }
+    else{
+        m_fallSpeed = 0;
     }
 }
 

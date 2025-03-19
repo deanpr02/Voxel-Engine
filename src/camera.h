@@ -38,6 +38,7 @@ class Camera
     Camera(float, float, float, float, float, float);
     void init();
     void moveCamera(CameraMovement, float);
+    void moveCameraUp(float,float);
     void moveCameraForward(float);
     void moveCameraBackward(float);
     void moveCameraLeft(float);

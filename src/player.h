@@ -20,12 +20,14 @@ class Player{
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_currentChunks;
     std::unordered_map<int,FuncType> m_inputMap;
     float m_deltaTime = 0.0f;
+    float m_jumpHeight = 10.0f;
 
     Player();
     void moveBodyLeft(float);
     void moveBodyRight(float);
     void moveBodyForward(float);
     void moveBodyBack(float);
+    void moveBodyUp(float);
     void setMovementSpeed(float);
     void processMovement(int);
     void processLookAround(float,float);
