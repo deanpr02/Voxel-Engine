@@ -10,6 +10,7 @@
 #include "shader.h"
 #include "renderer.h"
 #include "physics.h"
+#include "player.h"
 #include <vector>
 #include <unordered_map>
 #include <functional>
@@ -26,6 +27,7 @@ class Engine{
     Camera m_camera; /* Camera class object that controlling viewable portion of map */
     Renderer* m_renderer;
     PhysicsObject* m_player;
+    Player* player;
     //Player _player;
     std::unordered_map<int,FuncType> m_inputMap; /* HashTable holding different game objects and their functions */
     std::set<int> m_pressedKeys; /* All the keys currently being pressed during a certain frame */  /* Offset information for the floors for drawing */
@@ -43,7 +45,8 @@ class Engine{
         m_gameState = true;
         init();
         m_renderer = new Renderer();
-        m_player = new PhysicsObject(&m_camera.m_pos);
+        //m_player = new PhysicsObject(&m_camera.m_pos);
+        player = new Player();
 
     }
 

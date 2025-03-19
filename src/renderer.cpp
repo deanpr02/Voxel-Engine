@@ -36,14 +36,14 @@ void Renderer::loadShaders(){
     glDrawElements(GL_TRIANGLES, sizeof(_indices)/sizeof(unsigned int), GL_UNSIGNED_INT, 0);
 }*/
 
-void Renderer::updateChunks(Camera camera){
-    m_chunkManager->checkBoundary(camera.m_pos);
+void Renderer::updateChunks(Camera* camera){
+    m_chunkManager->checkBoundary(camera->m_pos);
 }
 
-void Renderer::drawWorld(Camera camera){
+void Renderer::drawWorld(Camera* camera){
     _shaders.s_cube.use();
-    _shaders.s_cube.setMat4("perspective",camera.m_projMatrix);
-    _shaders.s_cube.setMat4("view",camera.getViewMatrix());
+    _shaders.s_cube.setMat4("perspective",camera->m_projMatrix);
+    _shaders.s_cube.setMat4("view",camera->getViewMatrix());
     
     glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
     _shaders.s_cube.setMat4("model",blockSize);

@@ -1,8 +1,10 @@
 #include "camera.h"
 
-const float MOVEMENT_SPEED = 0.5f;
+const float MOVEMENT_SPEED = 5.0f;
 const float MOUSE_SENSITIVITY = 0.1f;
 const float EDGE_STEP = 0.1f;
+const unsigned int SCR_WIDTH = 1200;
+const unsigned int SCR_HEIGHT = 1000;
 
 Camera::Camera()
 {
@@ -20,6 +22,8 @@ Camera::Camera()
     //customs
     m_movementSpeed = MOVEMENT_SPEED;
     m_mouseSensitivity = MOUSE_SENSITIVITY;
+    //maybe change this \/
+    m_projMatrix = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
 }
 
 

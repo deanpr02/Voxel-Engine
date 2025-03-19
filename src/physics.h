@@ -16,6 +16,7 @@ class PhysicsObject{
     PhysicsObject(glm::vec3*);
     void applyGravity(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal>);
     glm::vec3 getChunkPosition(glm::vec3);
+    bool checkIfColliding(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal>,glm::vec3,glm::vec3);
 };
 
 #endif

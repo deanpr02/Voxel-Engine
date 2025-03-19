@@ -47,7 +47,9 @@ void Player::setMovementSpeed(float speed){
 }
 
 void Player::moveBodyForward(float deltaTime){
-    glm::vec3 forwardVec = glm::vec3(m_camera->m_direction.i,0,m_camera->m_direction.k);
+    float velocity = m_camera->m_movementSpeed * deltaTime; 
+    std::cout<<deltaTime;
+    glm::vec3 forwardVec = glm::vec3(velocity*m_camera->m_direction.i,0,velocity*m_camera->m_direction.k);
     bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,forwardVec);
     if(!isColliding){
         m_camera->moveCameraForward(deltaTime);
@@ -55,15 +57,17 @@ void Player::moveBodyForward(float deltaTime){
 }
 
 void Player::moveBodyBack(float deltaTime){
-    glm::vec3 backwardsVec = glm::vec3(-m_camera->m_direction.i,0,-m_camera->m_direction.k);
+    float velocity = m_camera->m_movementSpeed * deltaTime;
+    glm::vec3 backwardsVec = glm::vec3(-velocity*m_camera->m_direction.i,0,-velocity*m_camera->m_direction.k);
     bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,backwardsVec);
-    if(m_body->checkIfColliding(m_currentChunks,*m_body->m_position,backwardsVec)){
+    if(!isColliding){
         m_camera->moveCameraBackward(deltaTime);
     }
 }
 
 void Player::moveBodyLeft(float deltaTime){
-    glm::vec3 leftVec = -m_camera->m_right;
+    float velocity = m_camera->m_movementSpeed * deltaTime;
+    glm::vec3 leftVec = -velocity*m_camera->m_right;
     bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,leftVec);
     if(!isColliding){
         m_camera->moveCameraLeft(deltaTime);
@@ -71,7 +75,8 @@ void Player::moveBodyLeft(float deltaTime){
 }
 
 void Player::moveBodyRight(float deltaTime){
-    glm::vec3 rightVec = m_camera->m_right;
+    float velocity = m_camera->m_movementSpeed * deltaTime;
+    glm::vec3 rightVec = velocity*m_camera->m_right;
     bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,rightVec);
     if(!isColliding){
         m_camera->moveCameraRight(deltaTime);

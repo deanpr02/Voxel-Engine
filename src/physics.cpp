@@ -31,9 +31,23 @@ void PhysicsObject::applyGravity(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Ve
     
     if(currentChunk->m_blocks[x][y][z].m_active == false){
         m_position->y += GRAVITY;
-
     }
+}
 
+
+bool PhysicsObject::checkIfColliding(std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks, glm::vec3 worldPos, glm::vec3 direction){
+    glm::vec3 collisionPos = worldPos + direction;
+    int chunkX = std::floor(static_cast<double>(collisionPos.x+BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
+    int chunkZ = std::floor(static_cast<double>(collisionPos.z+BLOCK_SIZE)/CHUNK_SIZE)*CHUNK_SIZE;
     
+    Chunk* chunk = chunks[glm::vec3(chunkX,-CHUNK_HEIGHT,chunkZ)];
+    glm::vec3 chunkPos = getChunkPosition(collisionPos);
+    
+    //need to check the heights, currently we arechecking block under us, we need to look up 1/2 blocks
+    int x = chunkPos.x;
+    int y = (chunkPos.y < CHUNK_HEIGHT-1) ? chunkPos.y+1 : chunkPos.y;
+    int z = chunkPos.z;
+
+    return chunk->m_blocks[x][y][z].m_active;
 }
 
