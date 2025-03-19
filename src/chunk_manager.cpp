@@ -27,21 +27,6 @@ Chunk::Chunk(glm::vec3 position){
     //createMesh();
 }
 
-//void Chunk::createMesh(){
-//    for(int x = 0; x < CHUNK_SIZE; x++){
-//        for(int y = 0; y < CHUNK_HEIGHT; y++){
-//            for(int z = 0; z < CHUNK_SIZE; z++){
-//                //get noise value which will be height map value;
-//
-//                if(m_blocks[x][y][z].m_active == false){
-//                    continue;
-//                }
-//                createCube(x,y,z);
-//            }
-//        }
-//    }
-//    initializeBuffer();
-//}
 
 void Chunk::createCube(float x, float y, float z){
     glm::vec3 p0 = glm::vec3(m_worldPos.x+x-BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z-BLOCK_SIZE); //front-bottom-left
@@ -149,18 +134,12 @@ ChunkManager::ChunkManager(){
 
 void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
     std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap = getHeightMap(worldPos);
-   //std::cout<<heightMap[glm::vec3(16,0,16)]<<std::endl;
+    
     for(int x = 0; x < CHUNK_SIZE; x++){
         for(int z = 0; z < CHUNK_SIZE; z++){
             glm::vec3 pos = glm::vec3(x,0,z);
             int height = std::floor((heightMap[pos]*CHUNK_HEIGHT));
-            //if(x == 0 && z == 0){
-            //    height = CHUNK_HEIGHT-1;
-            //}
-            //if(x == 1 && z == 1){
-            //    height = CHUNK_HEIGHT-1;
-            //}
-           //std::cout<<height;
+            
             chunk->m_blocks[x][height][z].m_active = true;
             chunk->createCube(x,height,z);
         }
@@ -177,21 +156,16 @@ Chunk* ChunkManager::generateChunk(glm::vec3 worldPos){
 
 std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMap(glm::vec3 worldPos){
     std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap;
-    //std::cout<<"x: " << worldPos.x << "z: " << worldPos.z<<std::endl;
+
     for(int x = 0; x < CHUNK_WIDTH; x++){
         for(int z = 0; z < CHUNK_WIDTH; z++){
             float xPos = ((worldPos.x + x + BLOCK_SIZE))*0.1;
             float zPos = ((worldPos.z + z + BLOCK_SIZE))*0.1;
             float mappedHeight = m_generator->generate(xPos,zPos,0);
-            //std::cout<<mappedHeight;
+            
             heightMap[glm::vec3(x,0,z)] = mappedHeight;
-            //std::cout<<"x: " << xPos << "z: " << zPos << std::endl;
         }
     }
-
-    //for(auto it=heightMap.begin();it!=heightMap.end();it++){
-    //    std::cout<<it->second<<std::endl;
-    //}
     return heightMap;
 }
 
@@ -238,10 +212,6 @@ void ChunkManager::initializeChunks(glm::vec3 worldPos){
             
         }
     }
-    //for(int i = 0; i < m_chunks.size(); i++){
-    //    glBindVertexArray(m_chunks[i]->m_vao);
-    //    glDrawElements(GL_TRIANGLES,m_chunks[i]->m_indices.size(),GL_UNSIGNED_INT,0);
-    //}
 }
 
 void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChunk){
