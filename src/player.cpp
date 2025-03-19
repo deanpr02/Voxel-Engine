@@ -1,0 +1,79 @@
+#include "player.h"
+
+
+Player::Player(){
+    m_inputMap = {
+        {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
+        {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
+        {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
+        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}}
+    };
+
+    m_camera = new Camera();
+    m_body = new PhysicsObject(&m_camera->m_pos);
+}
+
+void Player::init(){
+    m_inputMap = {
+        {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
+        {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
+        {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
+        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}}
+    };
+}
+
+void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks){
+    m_deltaTime = deltaTime;
+    glm::vec3 camDirection = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
+    glm::mat4 view = glm::lookAt(m_camera->m_pos,m_camera->m_pos+camDirection,m_camera->m_up);
+    m_camera->m_viewMatrix = view;
+
+    m_currentChunks = chunks;
+    m_body->applyGravity(m_currentChunks);
+}
+
+void Player::processMovement(int key){
+    if(m_inputMap.find(key) != m_inputMap.end()){
+        m_inputMap[key]();
+    }
+}
+
+void Player::processLookAround(float xoffset, float yoffset){
+    m_camera->processMouseMovement(xoffset,yoffset,true);
+}
+
+void Player::setMovementSpeed(float speed){
+    m_camera->m_movementSpeed = speed;
+}
+
+void Player::moveBodyForward(float deltaTime){
+    glm::vec3 forwardVec = glm::vec3(m_camera->m_direction.i,0,m_camera->m_direction.k);
+    bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,forwardVec);
+    if(!isColliding){
+        m_camera->moveCameraForward(deltaTime);
+    }
+}
+
+void Player::moveBodyBack(float deltaTime){
+    glm::vec3 backwardsVec = glm::vec3(-m_camera->m_direction.i,0,-m_camera->m_direction.k);
+    bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,backwardsVec);
+    if(m_body->checkIfColliding(m_currentChunks,*m_body->m_position,backwardsVec)){
+        m_camera->moveCameraBackward(deltaTime);
+    }
+}
+
+void Player::moveBodyLeft(float deltaTime){
+    glm::vec3 leftVec = -m_camera->m_right;
+    bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,leftVec);
+    if(!isColliding){
+        m_camera->moveCameraLeft(deltaTime);
+    }
+}
+
+void Player::moveBodyRight(float deltaTime){
+    glm::vec3 rightVec = m_camera->m_right;
+    bool isColliding = m_body->checkIfColliding(m_currentChunks,*m_body->m_position,rightVec);
+    if(!isColliding){
+        m_camera->moveCameraRight(deltaTime);
+    }
+}
