@@ -27,7 +27,7 @@ class Player{
     void moveBodyRight(float);
     void moveBodyForward(float);
     void moveBodyBack(float);
-    void moveBodyUp(float);
+    void jump(float);
     void setMovementSpeed(float);
     void processMovement(int);
     void processLookAround(float,float);

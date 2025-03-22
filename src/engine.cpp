@@ -62,7 +62,7 @@ void Engine::init(){
         std::cout << "Failed to initialize GLAD" << std::endl;
     }
     glEnable(GL_DEPTH_TEST);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void Engine::frameBufferCallback(GLFWwindow* window, int width, int height){

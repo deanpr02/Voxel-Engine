@@ -53,6 +53,29 @@ void Renderer::drawWorld(Camera* camera){
 
 Renderer::Renderer(){
     this->loadShaders();
+    loadTextures();
     m_chunkManager = new ChunkManager();
+    m_chunkManager->setTextureMap(m_textureMap);
 }
+
+void Renderer::loadTextures(){
+    glGenTextures(1,&m_textureMap);
+    glBindTexture(GL_TEXTURE_2D,m_textureMap);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    int width,height,nrChannels;
+    unsigned char* data = stbi_load("../res/assets/pixelmap.png",&width,&height,&nrChannels,0);
+    if(data){
+        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else{
+        std::cout<<"failed to load texture"<<std::endl;
+    }
+    stbi_image_free(data);
+}  
 

@@ -7,22 +7,22 @@ Player::Player(){
         {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
         {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
         {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}},
-        {GLFW_KEY_SPACE, [this]() {moveBodyUp(m_deltaTime);}}
+        {GLFW_KEY_SPACE, [this]() {jump(m_deltaTime);}}
     };
 
     m_camera = new Camera();
     m_body = new PhysicsObject(&m_camera->m_pos);
 }
 
-void Player::init(){
-    m_inputMap = {
-        {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
-        {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
-        {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
-        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}},
-        {GLFW_KEY_SPACE, [this]() {moveBodyUp(m_deltaTime);}}
-    };
-}
+//void Player::init(){
+//    m_inputMap = {
+//        {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
+//        {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
+//        {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
+//        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}},
+//        {GLFW_KEY_SPACE, [this]() {moveBodyUp(m_deltaTime);}}
+//    };
+//}
 
 void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks){
     m_deltaTime = deltaTime;
@@ -84,6 +84,6 @@ void Player::moveBodyRight(float deltaTime){
     }
 }
 
-void Player::moveBodyUp(float deltaTime){
+void Player::jump(float deltaTime){
     m_camera->moveCameraUp(m_jumpHeight,deltaTime);
 }

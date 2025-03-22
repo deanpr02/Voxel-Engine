@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
+#include "stb_image.h"
 #include "shader.h"
 #include "camera.h"
 #include "block.h"
@@ -17,6 +18,7 @@ extern Shaders _shaders;
 class Renderer{
     public:
     ChunkManager* m_chunkManager;
+    unsigned int m_textureMap;
 
     Renderer();
     void initializeBuffer(Chunk);
@@ -25,6 +27,7 @@ class Renderer{
     void updateChunks(Camera*);
     void loadShaders();
     void init();
+    void loadTextures();
 
 };
 

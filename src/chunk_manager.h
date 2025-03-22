@@ -57,6 +57,7 @@ class Chunk{
     void createCube(float,float,float);
     void setWorldPos(glm::vec3);
     void addVertex(glm::vec3);
+    void addTex(glm::vec2);
     void addTriangle(int,int,int);
     void initializeBuffer();
     //glm::vec3 getChunkPosition(glm::vec3);
@@ -69,6 +70,7 @@ class ChunkManager{
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_chunkStorage;
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_visibleChunks; 
     ProceduralGenerator* m_generator;
+    unsigned int m_textureMap;
 
 
     ChunkManager();
@@ -84,6 +86,7 @@ class ChunkManager{
     void unloadChunk(glm::vec3);
     void renderChunk(Chunk*);
     void checkBoundary(glm::vec3);
+    void setTextureMap(unsigned int);
 };
 
 #endif

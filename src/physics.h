@@ -7,7 +7,7 @@
 #include <iostream>
 #include "chunk_manager.h"
 
-const float GRAVITY = 0.01f;
+const float GRAVITY = 0.02f;
 //const float GRAVITY = -9.8f;
 const float TERMINAL_VELOCITY = 98.0f;
 

@@ -38,46 +38,106 @@ void Chunk::createCube(float x, float y, float z){
     glm::vec3 p6 = glm::vec3(m_worldPos.x+x+BLOCK_SIZE,m_worldPos.y+y+BLOCK_SIZE,m_worldPos.z+z+BLOCK_SIZE); //back-top-right
     glm::vec3 p7 = glm::vec3(m_worldPos.x+x+BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z+BLOCK_SIZE); //back-bottom-right
 
+    glm::vec2 t0 = glm::vec2(1.0f,1.0f);
+    glm::vec2 t1 = glm::vec2(1.0,0.0f);
+    glm::vec2 t2 = glm::vec2(0.0f,1.0f);
+    glm::vec2 t3 = glm::vec2(0.0f,0.0f);
     //need to eventually add normal data/color data probably
-    addVertex(p0);
-    addVertex(p1);
-    addVertex(p2);
-    addVertex(p3);
-    addVertex(p4);
-    addVertex(p5);
-    addVertex(p6);
-    addVertex(p7);
-
-    int indexOffset = m_vertices.size() / 3 - 8;
-    //front
-    addTriangle(0+indexOffset,1+indexOffset,2+indexOffset);
-    addTriangle(0+indexOffset,2+indexOffset,3+indexOffset);
     
+    //front face
+    addVertex(p0); addTex(t3);
+    addVertex(p1); addTex(t2);
+    addVertex(p2); addTex(t0);
+    addVertex(p3); addTex(t1);
+
     //back face
-    addTriangle(4+indexOffset, 5+indexOffset, 6+indexOffset);
-    addTriangle(4+indexOffset, 6+indexOffset, 7+indexOffset);
+    addVertex(p4); addTex(t3);
+    addVertex(p5); addTex(t2);
+    addVertex(p6); addTex(t0);
+    addVertex(p7); addTex(t1);
 
     //left face
-    addTriangle(0+indexOffset, 4+indexOffset, 5+indexOffset);
-    addTriangle(0+indexOffset, 5+indexOffset, 1+indexOffset);
+    addVertex(p4); addTex(t3);
+    addVertex(p5); addTex(t2);
+    addVertex(p1); addTex(t0);
+    addVertex(p0); addTex(t1);
 
     //right face
-    addTriangle(3+indexOffset, 2+indexOffset, 6+indexOffset);
-    addTriangle(3+indexOffset, 7+indexOffset, 6+indexOffset);
+    addVertex(p3); addTex(t3);
+    addVertex(p2); addTex(t2);
+    addVertex(p6); addTex(t0);
+    addVertex(p7); addTex(t1);
 
     //top face
-    addTriangle(1+indexOffset, 5+indexOffset, 6+indexOffset);
-    addTriangle(1+indexOffset, 2+indexOffset, 6+indexOffset);
+    addVertex(p1); addTex(t3);
+    addVertex(p5); addTex(t2);
+    addVertex(p6); addTex(t0);
+    addVertex(p2); addTex(t1);
 
     //bottom face
-    addTriangle(4+indexOffset, 0+indexOffset, 3+indexOffset);
-    addTriangle(4+indexOffset, 3+indexOffset, 7+indexOffset);
+    addVertex(p0); addTex(t3);
+    addVertex(p4); addTex(t2);
+    addVertex(p7); addTex(t0);
+    addVertex(p3); addTex(t1);
+    //addVertex(p0);
+    //addTex(t3);
+    //addVertex(p1);
+    //addTex(t2);
+    //addVertex(p2);
+    //addTex(t0);
+    //addVertex(p3);
+    //addTex(t1);
+    //addVertex(p4);
+    //addTex(t3);
+    //addVertex(p5);
+    //addTex(t2);
+    //addVertex(p6);
+    //addTex(t0);
+    //addVertex(p7);
+    //addTex(t1);
+
+    //int indexOffset = m_vertices.size() / 3 - 8;
+    int indexOffset = m_vertices.size() / 5 - 24;
+
+    for (int i = 0; i < 6; i++) {
+    int baseIndex = indexOffset + i * 4;
+    addTriangle(baseIndex, baseIndex + 1, baseIndex + 2);
+    addTriangle(baseIndex, baseIndex + 2, baseIndex + 3);
+}
+    //front
+    //addTriangle(0+indexOffset,1+indexOffset,2+indexOffset);
+    //addTriangle(0+indexOffset,2+indexOffset,3+indexOffset);
+    //
+    ////back face
+    //addTriangle(4+indexOffset, 5+indexOffset, 6+indexOffset);
+    //addTriangle(4+indexOffset, 6+indexOffset, 7+indexOffset);
+//
+    ////left face
+    //addTriangle(0+indexOffset, 4+indexOffset, 5+indexOffset);
+    //addTriangle(0+indexOffset, 5+indexOffset, 1+indexOffset);
+//
+    ////right face
+    //addTriangle(3+indexOffset, 2+indexOffset, 6+indexOffset);
+    //addTriangle(3+indexOffset, 7+indexOffset, 6+indexOffset);
+//
+    ////top face
+    //addTriangle(1+indexOffset, 5+indexOffset, 6+indexOffset);
+    //addTriangle(1+indexOffset, 2+indexOffset, 6+indexOffset);
+//
+    ////bottom face
+    //addTriangle(4+indexOffset, 0+indexOffset, 3+indexOffset);
+    //addTriangle(4+indexOffset, 3+indexOffset, 7+indexOffset);
 }
 
 void Chunk::addVertex(glm::vec3 point){
     m_vertices.push_back(point.x);
     m_vertices.push_back(point.y);
     m_vertices.push_back(point.z);
+}
+
+void Chunk::addTex(glm::vec2 point){
+    m_vertices.push_back(point.x);
+    m_vertices.push_back(point.y);
 }
 
 void Chunk::addTriangle(int v1, int v2, int v3){
@@ -98,8 +158,12 @@ void Chunk::initializeBuffer(){
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(m_indices[0]), m_indices.data(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,5*sizeof(float),(void*)0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
+        5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 }
 
 ChunkManager::ChunkManager(){
@@ -107,6 +171,10 @@ ChunkManager::ChunkManager(){
     m_generator = new ProceduralGenerator();
     
     initializeChunks(spawn);
+}
+
+void ChunkManager::setTextureMap(unsigned int texture){
+    m_textureMap = texture;
 }
 
 //maybe change where i pass the heightmap into the chunk constructor itself
@@ -310,6 +378,7 @@ void ChunkManager::checkBoundary(glm::vec3 worldPos){
 }
 
 void ChunkManager::renderChunk(Chunk* chunk){
+    glBindTexture(GL_TEXTURE_2D,m_textureMap);
     glBindVertexArray(chunk->m_vao);
     glDrawElements(GL_TRIANGLES,chunk->m_indices.size(),GL_UNSIGNED_INT,0);
 }
@@ -320,5 +389,6 @@ void ChunkManager::renderChunks(){
         renderChunk(chunk);
     }
 }
+
 
 //everytime we move we will need to check to see if new chunks need to be rendered
