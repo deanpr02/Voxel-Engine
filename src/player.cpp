@@ -12,17 +12,8 @@ Player::Player(){
 
     m_camera = new Camera();
     m_body = new PhysicsObject(&m_camera->m_pos);
+    m_weapons = new WeaponSystem();
 }
-
-//void Player::init(){
-//    m_inputMap = {
-//        {GLFW_KEY_W, [this]() {moveBodyForward(m_deltaTime);}},
-//        {GLFW_KEY_S, [this]() {moveBodyBack(m_deltaTime);}},
-//        {GLFW_KEY_A, [this]() {moveBodyLeft(m_deltaTime);}},
-//        {GLFW_KEY_D, [this]() {moveBodyRight(m_deltaTime);}},
-//        {GLFW_KEY_SPACE, [this]() {moveBodyUp(m_deltaTime);}}
-//    };
-//}
 
 void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks){
     m_deltaTime = deltaTime;
@@ -32,6 +23,8 @@ void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash
 
     m_currentChunks = chunks;
     m_body->applyGravity(m_currentChunks,deltaTime);
+    m_weapons->currentSpell.tick(deltaTime,glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k));
+    //m_weapons->render();
 }
 
 void Player::processMovement(int key){
@@ -86,4 +79,11 @@ void Player::moveBodyRight(float deltaTime){
 
 void Player::jump(float deltaTime){
     m_camera->moveCameraUp(m_jumpHeight,deltaTime);
+}
+
+void Player::cast(){
+    glm::vec3 test = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
+    //test += m_camera->m_right;
+    Particle p = Particle(m_camera->m_pos,test);
+    m_weapons->currentSpell.m_particles.push_back(p);
 }

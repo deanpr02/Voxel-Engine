@@ -3,7 +3,7 @@ project(VoxelEngine VERSION 0.0.0)
 
 find_package(OpenGL REQUIRED)
 
-add_executable(${PROJECT_NAME} src/main.cpp src/glad.c src/shader.cpp src/camera.cpp src/q_math.cpp src/engine.cpp src/renderer.cpp src/chunk_manager.cpp src/generator.cpp src/physics.cpp src/player.cpp src/stb_image.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/glad.c src/shader.cpp src/camera.cpp src/q_math.cpp src/engine.cpp src/renderer.cpp src/chunk_manager.cpp src/generator.cpp src/physics.cpp src/player.cpp src/stb_image.cpp src/weapon.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/dependencies/glfw/include
                     ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/glad/include

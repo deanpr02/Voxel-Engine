@@ -54,7 +54,7 @@ class Chunk{
     Chunk(glm::vec3);
     ~Chunk();
     void createMesh();
-    void createCube(float,float,float);
+    void createCube(float,float,float,float);
     void setWorldPos(glm::vec3);
     void addVertex(glm::vec3);
     void addTex(glm::vec2);
@@ -71,6 +71,7 @@ class ChunkManager{
     std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> m_visibleChunks; 
     ProceduralGenerator* m_generator;
     unsigned int m_textureMap;
+    float m_texWidth;
 
 
     ChunkManager();

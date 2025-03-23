@@ -72,6 +72,12 @@
   "output": "CMakeFiles/VoxelEngine.dir/src/stb_image.cpp.obj"
 },
 {
+  "directory": "C:/Users/deanp/OneDrive/Documents/VoxelEngine/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/VoxelEngine.dir/includes_CXX.rsp -g -o CMakeFiles\\VoxelEngine.dir\\src\\weapon.cpp.obj -c C:\\Users\\deanp\\OneDrive\\Documents\\VoxelEngine\\src\\weapon.cpp",
+  "file": "C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/weapon.cpp",
+  "output": "CMakeFiles/VoxelEngine.dir/src/weapon.cpp.obj"
+},
+{
   "directory": "C:/Users/deanp/OneDrive/Documents/VoxelEngine/build/dependencies/glfw/src",
   "command": "C:\\MinGW\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\context.c.obj -c C:\\Users\\deanp\\OneDrive\\Documents\\VoxelEngine\\dependencies\\glfw\\src\\context.c",
   "file": "C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glfw/src/context.c",

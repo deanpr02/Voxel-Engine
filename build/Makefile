@@ -500,6 +500,30 @@ src/stb_image.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/stb_image.cpp.s
 .PHONY : src/stb_image.cpp.s
 
+src/weapon.obj: src/weapon.cpp.obj
+.PHONY : src/weapon.obj
+
+# target to build an object file
+src/weapon.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/weapon.cpp.obj
+.PHONY : src/weapon.cpp.obj
+
+src/weapon.i: src/weapon.cpp.i
+.PHONY : src/weapon.i
+
+# target to preprocess a source file
+src/weapon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/weapon.cpp.i
+.PHONY : src/weapon.cpp.i
+
+src/weapon.s: src/weapon.cpp.s
+.PHONY : src/weapon.s
+
+# target to generate assembly for a file
+src/weapon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/weapon.cpp.s
+.PHONY : src/weapon.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -552,6 +576,9 @@ help:
 	@echo ... src/stb_image.obj
 	@echo ... src/stb_image.i
 	@echo ... src/stb_image.s
+	@echo ... src/weapon.obj
+	@echo ... src/weapon.i
+	@echo ... src/weapon.s
 .PHONY : help
 
 

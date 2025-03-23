@@ -11,6 +11,7 @@
 #include "camera.h"
 #include "block.h"
 #include "chunk_manager.h"
+#include "player.h"
 
 extern Shaders _shaders;
 
@@ -19,8 +20,9 @@ class Renderer{
     public:
     ChunkManager* m_chunkManager;
     unsigned int m_textureMap;
+    WeaponSystem* m_weapons;
 
-    Renderer();
+    Renderer(WeaponSystem*);
     void initializeBuffer(Chunk);
     void drawCube(float,float,float);
     void drawWorld(Camera*);
@@ -28,6 +30,9 @@ class Renderer{
     void loadShaders();
     void init();
     void loadTextures();
+    void drawWeapons(Camera*);
+    void render(Camera*);
+
 
 };
 

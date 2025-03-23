@@ -28,15 +28,15 @@ Chunk::Chunk(glm::vec3 position){
 }
 
 
-void Chunk::createCube(float x, float y, float z){
-    glm::vec3 p0 = glm::vec3(m_worldPos.x+x-BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z-BLOCK_SIZE); //front-bottom-left
-    glm::vec3 p1 = glm::vec3(m_worldPos.x+x-BLOCK_SIZE,m_worldPos.y+y+BLOCK_SIZE,m_worldPos.z+z-BLOCK_SIZE); //front-top-left
-    glm::vec3 p2 = glm::vec3(m_worldPos.x+x+BLOCK_SIZE,m_worldPos.y+y+BLOCK_SIZE,m_worldPos.z+z-BLOCK_SIZE); //front-top-right
-    glm::vec3 p3 = glm::vec3(m_worldPos.x+x+BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z-BLOCK_SIZE); //front-bottom-right
-    glm::vec3 p4 = glm::vec3(m_worldPos.x+x-BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z+BLOCK_SIZE); //back-bottom-left
-    glm::vec3 p5 = glm::vec3(m_worldPos.x+x-BLOCK_SIZE,m_worldPos.y+y+BLOCK_SIZE,m_worldPos.z+z+BLOCK_SIZE); //back-top-left
-    glm::vec3 p6 = glm::vec3(m_worldPos.x+x+BLOCK_SIZE,m_worldPos.y+y+BLOCK_SIZE,m_worldPos.z+z+BLOCK_SIZE); //back-top-right
-    glm::vec3 p7 = glm::vec3(m_worldPos.x+x+BLOCK_SIZE,m_worldPos.y+y-BLOCK_SIZE,m_worldPos.z+z+BLOCK_SIZE); //back-bottom-right
+void Chunk::createCube(float x, float y, float z, float width){
+    glm::vec3 p0 = glm::vec3(m_worldPos.x+x-width,m_worldPos.y+y-width,m_worldPos.z+z-width); //front-bottom-left
+    glm::vec3 p1 = glm::vec3(m_worldPos.x+x-width,m_worldPos.y+y+width,m_worldPos.z+z-width); //front-top-left
+    glm::vec3 p2 = glm::vec3(m_worldPos.x+x+width,m_worldPos.y+y+width,m_worldPos.z+z-width); //front-top-right
+    glm::vec3 p3 = glm::vec3(m_worldPos.x+x+width,m_worldPos.y+y-width,m_worldPos.z+z-width); //front-bottom-right
+    glm::vec3 p4 = glm::vec3(m_worldPos.x+x-width,m_worldPos.y+y-width,m_worldPos.z+z+width); //back-bottom-left
+    glm::vec3 p5 = glm::vec3(m_worldPos.x+x-width,m_worldPos.y+y+width,m_worldPos.z+z+width); //back-top-left
+    glm::vec3 p6 = glm::vec3(m_worldPos.x+x+width,m_worldPos.y+y+width,m_worldPos.z+z+width); //back-top-right
+    glm::vec3 p7 = glm::vec3(m_worldPos.x+x+width,m_worldPos.y+y-width,m_worldPos.z+z+width); //back-bottom-right
 
     glm::vec2 t0 = glm::vec2(1.0f,1.0f);
     glm::vec2 t1 = glm::vec2(1.0,0.0f);
@@ -45,40 +45,61 @@ void Chunk::createCube(float x, float y, float z){
     //need to eventually add normal data/color data probably
     
     //front face
-    addVertex(p0); addTex(t3);
-    addVertex(p1); addTex(t2);
-    addVertex(p2); addTex(t0);
-    addVertex(p3); addTex(t1);
+    //addVertex(p0); addTex(t0);
+    //addVertex(p1); addTex(t1);
+    //addVertex(p2); addTex(t3);
+    //addVertex(p3); addTex(t2);
+    addVertex(p0); addTex(glm::vec2(32.0f/64.0f,1.0f));
+    addVertex(p1); addTex(glm::vec2(32.0f/64.0f,0.0f));
+    addVertex(p2); addTex(glm::vec2(0.0f,0.0f));
+    addVertex(p3); addTex(glm::vec2(0.0f,1.0f));
+
 
     //back face
-    addVertex(p4); addTex(t3);
-    addVertex(p5); addTex(t2);
-    addVertex(p6); addTex(t0);
-    addVertex(p7); addTex(t1);
+    //addVertex(p4); addTex(t0);
+    //addVertex(p5); addTex(t1);
+    //addVertex(p6); addTex(t3);
+    //addVertex(p7); addTex(t2);
+    addVertex(p4); addTex(glm::vec2(32.0f/64.0f,1.0f));
+    addVertex(p5); addTex(glm::vec2(32.0f/64.0f,0.0f));
+    addVertex(p6); addTex(glm::vec2(0.0f,0.0f));
+    addVertex(p7); addTex(glm::vec2(0.0f,1.0f));
 
     //left face
-    addVertex(p4); addTex(t3);
-    addVertex(p5); addTex(t2);
-    addVertex(p1); addTex(t0);
-    addVertex(p0); addTex(t1);
+    //addVertex(p4); addTex(t0);
+    //addVertex(p5); addTex(t1);
+    //addVertex(p1); addTex(t3);
+    //addVertex(p0); addTex(t2);
+    addVertex(p4); addTex(glm::vec2(32.0f/64.0f,1.0f));
+    addVertex(p5); addTex(glm::vec2(32.0f/64.0f,0.0f));
+    addVertex(p1); addTex(glm::vec2(0.0f,0.0f));
+    addVertex(p0); addTex(glm::vec2(0.0f,1.0f));
 
     //right face
-    addVertex(p3); addTex(t3);
-    addVertex(p2); addTex(t2);
-    addVertex(p6); addTex(t0);
-    addVertex(p7); addTex(t1);
+    //addVertex(p3); addTex(t0);
+    //addVertex(p2); addTex(t1);
+    //addVertex(p6); addTex(t3);
+    //addVertex(p7); addTex(t2);
+    addVertex(p3); addTex(glm::vec2(32.0f/64.0f,1.0f));
+    addVertex(p2); addTex(glm::vec2(32.0f/64.0f,0.0f));
+    addVertex(p6); addTex(glm::vec2(0.0f,0.0f));
+    addVertex(p7); addTex(glm::vec2(0.0f,1.0f));
 
     //top face
-    addVertex(p1); addTex(t3);
-    addVertex(p5); addTex(t2);
-    addVertex(p6); addTex(t0);
-    addVertex(p2); addTex(t1);
+    //addVertex(p1); addTex(t0);
+    addVertex(p1); addTex(glm::vec2(32.0f/64.0f,0.0f));
+    //addVertex(p5); addTex(t1);
+    addVertex(p5); addTex(glm::vec2(32.0f/64.0f,1.0f));
+    //addVertex(p6); addTex(t3);
+    addVertex(p6); addTex(glm::vec2(1.0f,1.0f));
+    //addVertex(p2); addTex(t2);
+    addVertex(p2); addTex(glm::vec2(1.0,0.0f));
 
     //bottom face
-    addVertex(p0); addTex(t3);
-    addVertex(p4); addTex(t2);
-    addVertex(p7); addTex(t0);
-    addVertex(p3); addTex(t1);
+    addVertex(p0); addTex(t0);
+    addVertex(p4); addTex(t1);
+    addVertex(p7); addTex(t3);
+    addVertex(p3); addTex(t2);
     //addVertex(p0);
     //addTex(t3);
     //addVertex(p1);
@@ -209,7 +230,7 @@ void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
             int height = std::floor((heightMap[pos]*CHUNK_HEIGHT));
             
             chunk->m_blocks[x][height][z].m_active = true;
-            chunk->createCube(x,height,z);
+            chunk->createCube(x,height,z,0.5f);
         }
     }
     chunk->initializeBuffer();

@@ -50,6 +50,7 @@ void Engine::init(){
     glfwSetWindowUserPointer(m_window, this);
     glfwSetFramebufferSizeCallback(m_window,frameBufferCallback);
     glfwSetCursorPosCallback(m_window,mouseCallback);
+    glfwSetMouseButtonCallback(m_window,mouseClickCallback);
     glfwSetKeyCallback(m_window, keyCallback);
     glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -86,6 +87,18 @@ void Engine::mouseCallback(GLFWwindow* window, double xposIn, double yposIn){
     
     engine->player->processLookAround(xoffset,yoffset);
     //engine->m_camera.processMouseMovement(xoffset,yoffset,true);
+}
+
+void Engine::mouseClickCallback(GLFWwindow* window, int button, int action, int mods){
+    Engine* engine = static_cast<Engine*>(glfwGetWindowUserPointer(window));
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {
+        engine->player->cast();
+        // Left mouse button was pressed
+        //double xpos, ypos;
+        //glfwGetCursorPos(window, &xpos, &ypos);
+        // Handle the click at (xpos, ypos)
+    }
 }
 
 void Engine::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods){
@@ -132,7 +145,7 @@ void Engine::updateCamera(){
 }
 
 void Engine::draw(){
-    m_renderer->drawWorld(player->m_camera);
+    m_renderer->render(player->m_camera);
 }
 
 void Engine::render(){

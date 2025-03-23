@@ -44,15 +44,16 @@ class Engine{
         m_firstMouse = true;
         m_gameState = true;
         init();
-        m_renderer = new Renderer();
-        //m_player = new PhysicsObject(&m_camera.m_pos);
         player = new Player();
+        m_renderer = new Renderer(player->m_weapons);
+        //m_player = new PhysicsObject(&m_camera.m_pos);
 
     }
 
     void processInput(GLFWwindow*);
     void init();
     static void mouseCallback(GLFWwindow*,double,double);
+    static void mouseClickCallback(GLFWwindow*,int,int,int);
     static void frameBufferCallback(GLFWwindow*,int,int);
     static void keyCallback(GLFWwindow*,int,int,int,int);
     int checkInit();
