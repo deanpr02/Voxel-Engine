@@ -37,6 +37,7 @@ class Spell{
     float spellVelocity = 10.0f;
     float spellRange = 10.0f;
     int spellDensity = 3;
+    int spellRadius = 3;
     //Shader m_shader;
 
 

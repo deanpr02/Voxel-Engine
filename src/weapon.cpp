@@ -120,8 +120,12 @@ void Particle::draw(){
 }
 
 void WeaponSystem::spawn(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
-    for(int i=-1*(currentSpell.spellDensity/2);i<=currentSpell.spellDensity/2;i++){
-        glm::vec3 offsetOrigin = origin + (right*static_cast<float>(i));
+    int random = -currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1));
+    for(int i=0;i<currentSpell.spellDensity;i++){
+        float randomX = (-currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1)))*0.2;
+        float randomY = (-currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1)))*0.2;
+        glm::vec3 offsetOrigin = origin + (right*randomX);
+        offsetOrigin += glm::vec3(0,randomY,0);
         Particle p = Particle(offsetOrigin,dir);
         currentSpell.m_particles.push_back(p);
     }
