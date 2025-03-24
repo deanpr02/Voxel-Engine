@@ -82,8 +82,9 @@ void Player::jump(float deltaTime){
 }
 
 void Player::cast(){
-    glm::vec3 test = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
-    //test += m_camera->m_right;
-    Particle p = Particle(m_camera->m_pos,test);
-    m_weapons->currentSpell.m_particles.push_back(p);
+    glm::vec3 dir = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
+    glm::vec3 origin = m_camera->m_pos + (m_camera->m_right * 0.5f);
+    m_weapons->spawn(origin,dir,m_camera->m_right);
+    //Particle p = Particle(origin, dir);
+    //m_weapons->currentSpell.m_particles.push_back(p);
 }

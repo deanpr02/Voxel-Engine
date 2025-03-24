@@ -119,6 +119,17 @@ void Particle::draw(){
     glDrawElements(GL_TRIANGLES,indices.size(),GL_UNSIGNED_INT,0);
 }
 
+void WeaponSystem::spawn(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
+    for(int i=-1*(currentSpell.spellDensity/2);i<=currentSpell.spellDensity/2;i++){
+        glm::vec3 offsetOrigin = origin + (right*static_cast<float>(i));
+        Particle p = Particle(offsetOrigin,dir);
+        currentSpell.m_particles.push_back(p);
+    }
+    //Particle p = Particle(origin, dir);
+    //currentSpell.m_particles.push_back(p);
+
+}
+
 
 //void WeaponSystem::render(){
 //    //for(int i=0;i<m_particles.size();i++){

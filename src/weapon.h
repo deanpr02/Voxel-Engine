@@ -36,6 +36,7 @@ class Spell{
     std::vector<Particle> m_particles;
     float spellVelocity = 10.0f;
     float spellRange = 10.0f;
+    int spellDensity = 3;
     //Shader m_shader;
 
 
@@ -52,6 +53,7 @@ class WeaponSystem{
 
     void render();
     void draw();
+    void spawn(glm::vec3,glm::vec3,glm::vec3);
 };
 
 #endif
