@@ -24,18 +24,16 @@ std::vector<Particle> Spell::getParticles(){
 
 Particle::Particle(glm::vec3 worldPos, glm::vec3 dir){
     aim = dir;
-    create(worldPos,dir);
+    for(int i=-1;i<=1;i++){
+        glm::vec3 test = worldPos + (dir * (0.2f*i));
+        create(test,dir);
+    }
+    //create(worldPos,dir);
 }
 
 void Particle::shift(float deltaTime, float velocity){
     glm::vec3 forward = (aim * deltaTime) * velocity;
-    float magnitude = std::abs(glm::length(offset));
-    if(magnitude <= 10.0f){
-        offset += forward;
-    }
-    else{
-
-    }
+    offset += forward;
 }
 
 void Particle::create(glm::vec3 worldPos, glm::vec3 dir){
@@ -129,15 +127,6 @@ void WeaponSystem::spawn(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
         Particle p = Particle(offsetOrigin,dir);
         currentSpell.m_particles.push_back(p);
     }
-    //Particle p = Particle(origin, dir);
-    //currentSpell.m_particles.push_back(p);
-
 }
 
-
-//void WeaponSystem::render(){
-//    //for(int i=0;i<m_particles.size();i++){
-//    //    m_particles[i].draw();
-//    //}
-//}
 
