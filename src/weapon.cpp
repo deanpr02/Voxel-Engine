@@ -3,7 +3,8 @@
 
 const glm::vec3 handPos = glm::vec3(-2.0f,0.5f,-2.0f);
 
-void Spell::tick(float deltaTime,glm::vec3 dir){
+void Spell::tick(float deltaTime,glm::vec3 dir, glm::vec3 right){
+    jolt(deltaTime,right);
     for(auto it = m_particles.begin();it != m_particles.end();){
         Particle& p = *it;
         float magnitude = std::abs(glm::length(p.offset));
@@ -18,34 +19,90 @@ void Spell::tick(float deltaTime,glm::vec3 dir){
     }
 }
 
+//this moves the particles randomly a small amount horizontally/vertically
+void Spell::jolt(float deltaTime, glm::vec3 right){
+    const int numParticles = 7;
+    const int delay = 60;
+    if(m_particles.size() == 0){
+        return;
+    }
+
+    for(int i=0;i<m_particles.size();i++){
+        const int verticesPerCube = m_particles[i].vertices.size() / numParticles;
+    
+    //for (int j = 0; j < numParticles; j++) { // For each cube in the particle
+        if(m_particles[i].moveIndex == 0){
+            float randX = -0.025f + static_cast<float>(rand()) / RAND_MAX * 0.05f;
+            float randY = -0.025f + static_cast<float>(rand()) / RAND_MAX * 0.05f;
+        
+            glm::vec3 shift = (right * randX + glm::vec3(0, 1, 0) * randY);
+            m_particles[i].lastMove = shift;
+        }
+
+        if(m_particles[i].moveIndex % delay == 0){
+            int moveIndex = m_particles[i].moveIndex / delay;
+        // Calculate start/end indices for THIS cube's vertices
+            int startIdx = moveIndex * verticesPerCube;
+            int endIdx = (moveIndex + 1) * verticesPerCube;
+
+            // Apply same shift to all vertices of THIS cube
+            glm::vec3 move = m_particles[i].lastMove;
+            for (int k = startIdx; k < endIdx; k += 3) {
+                m_particles[i].vertices[k]   += move.x;
+                m_particles[i].vertices[k+1] += move.y;
+                m_particles[i].vertices[k+2] += move.z;
+            }
+        }
+        m_particles[i].moveIndex += 1;
+        if(m_particles[i].moveIndex >= 7*delay){
+            m_particles[i].moveIndex = 0;
+        }
+
+    //}
+        glBindVertexArray(m_particles[i].vao);
+        glBindBuffer(GL_ARRAY_BUFFER, m_particles[i].vbo);
+        glBufferData(GL_ARRAY_BUFFER, m_particles[i].vertices.size() * sizeof(m_particles[i].vertices[0]), m_particles[i].vertices.data(), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_particles[i].ebo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_particles[i].indices.size() * sizeof(m_particles[i].indices[0]), m_particles[i].indices.data(), GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
+        glEnableVertexAttribArray(0);
+    }
+
+    
+}
+
 std::vector<Particle> Spell::getParticles(){
     return m_particles;
 }
 
 Particle::Particle(glm::vec3 worldPos, glm::vec3 dir){
     aim = dir;
-    for(int i=-1;i<=1;i++){
-        glm::vec3 test = worldPos + (dir * (0.2f*i));
+    for(int i=-3;i<=3;i++){
+        glm::vec3 test = worldPos + (dir * (0.05f*i));
         create(test,dir);
     }
     //create(worldPos,dir);
 }
 
 void Particle::shift(float deltaTime, float velocity){
+
+    //move particle forward
     glm::vec3 forward = (aim * deltaTime) * velocity;
     offset += forward;
 }
 
 void Particle::create(glm::vec3 worldPos, glm::vec3 dir){
     glm::vec3 offset = dir;
-    glm::vec3 p0 = glm::vec3(worldPos.x+offset.x-0.1,worldPos.y+offset.y-0.1,worldPos.z+offset.z-0.1); //front-bottom-left
-    glm::vec3 p1 = glm::vec3(worldPos.x+offset.x-0.1,worldPos.y+offset.y+0.1,worldPos.z+offset.z-0.1); //front-top-left
-    glm::vec3 p2 = glm::vec3(worldPos.x+offset.x+0.1,worldPos.y+offset.y+0.1,worldPos.z+offset.z-0.1); //front-top-right
-    glm::vec3 p3 = glm::vec3(worldPos.x+offset.x+0.1,worldPos.y+offset.y-0.1,worldPos.z+offset.z-0.1); //front-bottom-right
-    glm::vec3 p4 = glm::vec3(worldPos.x+offset.x-0.1,worldPos.y+offset.y-0.1,worldPos.z+offset.z+0.1); //back-bottom-left
-    glm::vec3 p5 = glm::vec3(worldPos.x+offset.x-0.1,worldPos.y+offset.y+0.1,worldPos.z+offset.z+0.1); //back-top-left
-    glm::vec3 p6 = glm::vec3(worldPos.x+offset.x+0.1,worldPos.y+offset.y+0.1,worldPos.z+offset.z+0.1); //back-top-right
-    glm::vec3 p7 = glm::vec3(worldPos.x+offset.x+0.1,worldPos.y+offset.y-0.1,worldPos.z+offset.z+0.1);
+    glm::vec3 p0 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-left
+    glm::vec3 p1 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-left
+    glm::vec3 p2 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-right
+    glm::vec3 p3 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-right
+    glm::vec3 p4 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z+size); //back-bottom-left
+    glm::vec3 p5 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-left
+    glm::vec3 p6 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-right
+    glm::vec3 p7 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z+size);
 
     addVertex(p0);
     addVertex(p1);
@@ -120,8 +177,8 @@ void Particle::draw(){
 void WeaponSystem::spawn(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
     int random = -currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1));
     for(int i=0;i<currentSpell.spellDensity;i++){
-        float randomX = (-currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1)))*0.2;
-        float randomY = (-currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1)))*0.2;
+        float randomX = (-currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1)))*0.02;
+        float randomY = (-currentSpell.spellRadius + (std::rand() % (currentSpell.spellRadius * 2 + 1)))*0.02;
         glm::vec3 offsetOrigin = origin + (right*randomX);
         offsetOrigin += glm::vec3(0,randomY,0);
         Particle p = Particle(offsetOrigin,dir);

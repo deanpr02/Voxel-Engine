@@ -20,6 +20,9 @@ class Particle{
     std::vector<int> indices;
     glm::vec3 offset = glm::vec3(0,0,0);
     glm::vec3 aim;
+    int moveIndex = 0;
+    glm::vec3 lastMove;
+    float size = 0.025f;
 
     Particle(glm::vec3,glm::vec3);
     void create(glm::vec3,glm::vec3);
@@ -34,14 +37,15 @@ class Spell{
     public:
     //unsigned int particle;
     std::vector<Particle> m_particles;
-    float spellVelocity = 10.0f;
+    float spellVelocity = 5.0f;
     float spellRange = 10.0f;
-    int spellDensity = 3;
-    int spellRadius = 3;
+    int spellDensity = 10;
+    int spellRadius = 10;
     //Shader m_shader;
 
 
-    void tick(float,glm::vec3);
+    void tick(float,glm::vec3,glm::vec3);
+    void jolt(float,glm::vec3);
     void drawParticle(glm::vec3);
     std::vector<Particle> getParticles();
 };
