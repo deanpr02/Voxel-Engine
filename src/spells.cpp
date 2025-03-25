@@ -7,10 +7,9 @@ std::vector<Particle> Spell::getParticles(){
 Particle::Particle(glm::vec3 worldPos, glm::vec3 dir){
     aim = dir;
     for(int i=-3;i<=3;i++){
-        glm::vec3 test = worldPos + (dir * (0.05f*i));
-        create(test,dir);
+        glm::vec3 offsetPos = worldPos + (dir * (0.05f*i));
+        create(offsetPos,dir);
     }
-    //create(worldPos,dir);
 }
 
 void Particle::shift(float deltaTime, float velocity){

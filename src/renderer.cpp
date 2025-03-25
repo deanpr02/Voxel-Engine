@@ -1,21 +1,20 @@
 #include "renderer.h"
 
-struct Shaders _shaders;
-
 Renderer::Renderer(WeaponSystem* weapons){
     m_chunkManager = new ChunkManager();
     m_weapons = weapons;
 
-    m_spellShaders = {{LIGHTNING,_shaders.s_lightning}};
-
     this->loadShaders();
     loadTextures();
+
+    m_spellShaders = {{LIGHTNING,m_shaders.s_lightning}};
+
     m_chunkManager->setTextureMap(m_textureMap);
 }
 
 void Renderer::loadShaders(){
-    _shaders.s_cube.Load("../res/shader/cube.vert","../res/shader/cube.frag");
-    _shaders.s_lightning.Load("../res/shader/lightning.vert","../res/shader/lightning.frag");
+    m_shaders.s_cube->Load("../res/shader/cube.vert","../res/shader/cube.frag");
+    m_shaders.s_lightning->Load("../res/shader/lightning.vert","../res/shader/lightning.frag");
 }
 
 void Renderer::updateChunks(Camera* camera){
@@ -23,21 +22,21 @@ void Renderer::updateChunks(Camera* camera){
 }
 
 void Renderer::drawWorld(Camera* camera){
-    _shaders.s_cube.use();
-    _shaders.s_cube.setMat4("perspective",camera->m_projMatrix);
-    _shaders.s_cube.setMat4("view",camera->getViewMatrix());
+    m_shaders.s_cube->use();
+    m_shaders.s_cube->setMat4("perspective",camera->m_projMatrix);
+    m_shaders.s_cube->setMat4("view",camera->getViewMatrix());
     
     glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
-    _shaders.s_cube.setMat4("model",blockSize);
+    m_shaders.s_cube->setMat4("model",blockSize);
 
     m_chunkManager->renderChunks();
 }
 
 void Renderer::drawWeapons(Camera* camera){
-    Shader currentShader = m_spellShaders[m_weapons->m_currentSpell->id];
-    _shaders.s_lightning.use();
-    _shaders.s_lightning.setMat4("perspective",camera->m_projMatrix);
-    _shaders.s_lightning.setMat4("view",camera->getViewMatrix());
+    Shader* currentShader = m_spellShaders[m_weapons->m_currentSpell->id];
+    currentShader->use();
+    currentShader->setMat4("perspective",camera->m_projMatrix);
+    currentShader->setMat4("view",camera->getViewMatrix());
     
     glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
     //glm::mat4 translatedBlock = glm::translate(blockSize,)
@@ -46,7 +45,7 @@ void Renderer::drawWeapons(Camera* camera){
     for(int i=0;i<particles.size();i++){
         Particle currParticle = particles[i];
         glm::mat4 translatedBlock = glm::translate(blockSize,currParticle.offset);
-        _shaders.s_lightning.setMat4("model",translatedBlock);
+        currentShader->setMat4("model",translatedBlock);
         currParticle.draw();
     }
 }

@@ -20,17 +20,10 @@ class Shader{
         void setVec3(const std::string &name, float x, float y, float z) const;
         void setVec2(const std::string &name, const glm::vec2 &value) const;
         void setVec2(const std::string &name, float x, float y) const;
+
     private:
         void checkCompileErrors(unsigned int shader, std::string type);
 
 };
 
-struct Shaders {
-    Shader s_camera;
-    Shader s_wall;
-    Shader s_floor;
-    Shader s_light;
-    Shader s_cube;
-    Shader s_lightning;
-};
 #endif

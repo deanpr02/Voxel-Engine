@@ -14,15 +14,22 @@
 #include "player.h"
 #include "types.h"
 
-extern Shaders _shaders;
-
-
 class Renderer{
     public:
+    struct Shaders {
+        Shader* s_camera = new Shader();
+        Shader* s_wall = new Shader();
+        Shader* s_floor = new Shader();
+        Shader* s_light = new Shader();
+        Shader* s_cube = new Shader();
+        Shader* s_lightning = new Shader();
+    };
+
     ChunkManager* m_chunkManager;
     unsigned int m_textureMap;
     WeaponSystem* m_weapons;
-    std::unordered_map<SPELL_TYPE,Shader> m_spellShaders;
+    std::unordered_map<SPELL_TYPE,Shader*> m_spellShaders;
+    struct Shaders m_shaders;
 
     Renderer(WeaponSystem*);
     void initializeBuffer(Chunk);
@@ -34,6 +41,7 @@ class Renderer{
     void loadTextures();
     void drawWeapons(Camera*);
     void render(Camera*);
+
 
 
 };

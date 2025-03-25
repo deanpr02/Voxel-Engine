@@ -42,13 +42,11 @@ class Spell{
     int spellDensity;
     int spellRadius;
     SPELL_TYPE id;
-    //Shader m_shader;
 
     void drawParticle(glm::vec3);
     std::vector<Particle> getParticles();
 
     virtual void tick(float,glm::vec3,glm::vec3);
-    //virtual void jolt(float,glm::vec3);
 };
 
 class Lightning: public Spell{
