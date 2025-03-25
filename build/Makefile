@@ -476,6 +476,30 @@ src/shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
 
+src/spells.obj: src/spells.cpp.obj
+.PHONY : src/spells.obj
+
+# target to build an object file
+src/spells.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/spells.cpp.obj
+.PHONY : src/spells.cpp.obj
+
+src/spells.i: src/spells.cpp.i
+.PHONY : src/spells.i
+
+# target to preprocess a source file
+src/spells.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/spells.cpp.i
+.PHONY : src/spells.cpp.i
+
+src/spells.s: src/spells.cpp.s
+.PHONY : src/spells.s
+
+# target to generate assembly for a file
+src/spells.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxelEngine.dir\build.make CMakeFiles/VoxelEngine.dir/src/spells.cpp.s
+.PHONY : src/spells.cpp.s
+
 src/stb_image.obj: src/stb_image.cpp.obj
 .PHONY : src/stb_image.obj
 
@@ -573,6 +597,9 @@ help:
 	@echo ... src/shader.obj
 	@echo ... src/shader.i
 	@echo ... src/shader.s
+	@echo ... src/spells.obj
+	@echo ... src/spells.i
+	@echo ... src/spells.s
 	@echo ... src/stb_image.obj
 	@echo ... src/stb_image.i
 	@echo ... src/stb_image.s

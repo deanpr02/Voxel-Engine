@@ -24,7 +24,7 @@ void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash
     m_currentChunks = chunks;
     m_body->applyGravity(m_currentChunks,deltaTime);
     //need to optimize where this is only called when a spell is equipped
-    m_weapons->currentSpell.tick(deltaTime,glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k),m_camera->m_right);
+    m_weapons->m_currentSpell->tick(deltaTime,glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k),m_camera->m_right);
     //m_weapons->render();
 }
 

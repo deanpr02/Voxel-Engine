@@ -39,7 +39,7 @@ void Renderer::drawWeapons(Camera* camera){
     glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
     //glm::mat4 translatedBlock = glm::translate(blockSize,)
     //_shaders.s_lightning.setMat4("model",blockSize);
-    std::vector<Particle> particles = m_weapons->currentSpell.m_particles;
+    std::vector<Particle> particles = m_weapons->m_currentSpell->m_particles;
     for(int i=0;i<particles.size();i++){
         Particle currParticle = particles[i];
         glm::mat4 translatedBlock = glm::translate(blockSize,currParticle.offset);
