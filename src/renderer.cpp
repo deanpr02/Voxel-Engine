@@ -6,6 +6,8 @@ Renderer::Renderer(WeaponSystem* weapons){
     m_chunkManager = new ChunkManager();
     m_weapons = weapons;
 
+    m_spellShaders = {{LIGHTNING,_shaders.s_lightning}};
+
     this->loadShaders();
     loadTextures();
     m_chunkManager->setTextureMap(m_textureMap);
@@ -32,6 +34,7 @@ void Renderer::drawWorld(Camera* camera){
 }
 
 void Renderer::drawWeapons(Camera* camera){
+    Shader currentShader = m_spellShaders[m_weapons->m_currentSpell->id];
     _shaders.s_lightning.use();
     _shaders.s_lightning.setMat4("perspective",camera->m_projMatrix);
     _shaders.s_lightning.setMat4("view",camera->getViewMatrix());

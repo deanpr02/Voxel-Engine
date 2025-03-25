@@ -110,6 +110,7 @@ Lightning::Lightning(){
     spellRange = 10.0f;
     spellDensity = 10;
     spellRadius = 10;
+    id = LIGHTNING;
 }
 
 

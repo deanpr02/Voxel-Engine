@@ -9,6 +9,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+#include "types.h"
+
 
 class Particle{
     public:
@@ -39,6 +41,7 @@ class Spell{
     float spellRange;
     int spellDensity;
     int spellRadius;
+    SPELL_TYPE id;
     //Shader m_shader;
 
     void drawParticle(glm::vec3);
@@ -50,6 +53,8 @@ class Spell{
 
 class Lightning: public Spell{
     public:
+    SPELL_TYPE id;
+
     Lightning();
     void tick(float,glm::vec3,glm::vec3);
     void jolt(float,glm::vec3);

@@ -12,6 +12,7 @@
 #include "block.h"
 #include "chunk_manager.h"
 #include "player.h"
+#include "types.h"
 
 extern Shaders _shaders;
 
@@ -21,6 +22,7 @@ class Renderer{
     ChunkManager* m_chunkManager;
     unsigned int m_textureMap;
     WeaponSystem* m_weapons;
+    std::unordered_map<SPELL_TYPE,Shader> m_spellShaders;
 
     Renderer(WeaponSystem*);
     void initializeBuffer(Chunk);
