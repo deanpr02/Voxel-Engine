@@ -1,13 +1,10 @@
 #include "spells.h"
 
-std::vector<Particle> Spell::getParticles(){
-    return m_particles;
-}
-
-Particle::Particle(glm::vec3 worldPos, glm::vec3 dir){
+Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize){
+    size = pSize;
     aim = dir;
     for(int i=-3;i<=3;i++){
-        glm::vec3 offsetPos = worldPos + (dir * (0.05f*i));
+        glm::vec3 offsetPos = worldPos + (dir * (size*2*i)); // originally 0.05f*i
         create(offsetPos,dir);
     }
 }
@@ -104,11 +101,28 @@ void Spell::tick(float deltaTime, glm::vec3 worldPos, glm::vec3 right){
     std::cout<<"spell tick";
 }
 
+std::vector<Particle> Spell::getParticles(){
+    return m_particles;
+}
+
+void Spell::summon(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
+    int random = -spellRadius + (std::rand() % (spellRadius * 2 + 1));
+    for(int i=0;i<spellDensity;i++){
+        float randomX = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
+        float randomY = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
+        glm::vec3 offsetOrigin = origin + (right*randomX);
+        offsetOrigin += glm::vec3(0,randomY,0);
+        Particle p = Particle(offsetOrigin,dir,particleSize);
+        m_particles.push_back(p);
+    }
+}
+
 Lightning::Lightning(){
     spellVelocity = 5.0f;
     spellRange = 10.0f;
     spellDensity = 10;
     spellRadius = 10;
+    particleSize = 0.025f;
     id = LIGHTNING;
 }
 
@@ -123,7 +137,6 @@ void Lightning::jolt(float deltaTime, glm::vec3 right){
     for(int i=0;i<m_particles.size();i++){
         const int verticesPerCube = m_particles[i].vertices.size() / numParticles;
     
-    //for (int j = 0; j < numParticles; j++) { // For each cube in the particle
         if(m_particles[i].moveIndex == 0){
             float randX = -0.05f + static_cast<float>(rand()) / RAND_MAX * 0.1f;
             float randY = -0.05f + static_cast<float>(rand()) / RAND_MAX * 0.1f;
@@ -151,7 +164,6 @@ void Lightning::jolt(float deltaTime, glm::vec3 right){
             m_particles[i].moveIndex = 0;
         }
 
-    //}
         glBindVertexArray(m_particles[i].vao);
         glBindBuffer(GL_ARRAY_BUFFER, m_particles[i].vbo);
         glBufferData(GL_ARRAY_BUFFER, m_particles[i].vertices.size() * sizeof(m_particles[i].vertices[0]), m_particles[i].vertices.data(), GL_STATIC_DRAW);

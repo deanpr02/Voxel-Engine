@@ -23,9 +23,9 @@ class Particle{
     glm::vec3 aim;
     int moveIndex = 0;
     glm::vec3 lastMove;
-    float size = 0.025f;
+    float size;
 
-    Particle(glm::vec3,glm::vec3);
+    Particle(glm::vec3,glm::vec3,float);
     void create(glm::vec3,glm::vec3);
     void initialize();
     void addVertex(glm::vec3);
@@ -41,9 +41,11 @@ class Spell{
     float spellRange;
     int spellDensity;
     int spellRadius;
+    float particleSize;
     SPELL_TYPE id;
 
     void drawParticle(glm::vec3);
+    void summon(glm::vec3,glm::vec3,glm::vec3);
     std::vector<Particle> getParticles();
 
     virtual void tick(float,glm::vec3,glm::vec3);
@@ -51,7 +53,6 @@ class Spell{
 
 class Lightning: public Spell{
     public:
-    SPELL_TYPE id;
 
     Lightning();
     void tick(float,glm::vec3,glm::vec3);
