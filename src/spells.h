@@ -25,7 +25,7 @@ class Particle{
     glm::vec3 lastMove;
     float size;
 
-    Particle(glm::vec3,glm::vec3,float);
+    Particle(glm::vec3,glm::vec3,float,float);
     void create(glm::vec3,glm::vec3);
     void initialize();
     void addVertex(glm::vec3);
@@ -41,6 +41,7 @@ class Spell{
     float spellRange;
     int spellDensity;
     int spellRadius;
+    int numParticles;
     float particleSize;
     SPELL_TYPE id;
 

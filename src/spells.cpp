@@ -1,9 +1,9 @@
 #include "spells.h"
 
-Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize){
+Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, float pNum){
     size = pSize;
     aim = dir;
-    for(int i=-3;i<=3;i++){
+    for(int i=-(pNum/2);i<=pNum/2;i++){
         glm::vec3 offsetPos = worldPos + (dir * (size*2*i)); // originally 0.05f*i
         create(offsetPos,dir);
     }
@@ -112,7 +112,7 @@ void Spell::summon(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
         float randomY = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
         glm::vec3 offsetOrigin = origin + (right*randomX);
         offsetOrigin += glm::vec3(0,randomY,0);
-        Particle p = Particle(offsetOrigin,dir,particleSize);
+        Particle p = Particle(offsetOrigin,dir,particleSize,numParticles);
         m_particles.push_back(p);
     }
 }
@@ -123,12 +123,13 @@ Lightning::Lightning(){
     spellDensity = 10;
     spellRadius = 10;
     particleSize = 0.025f;
+    numParticles = 7;
     id = LIGHTNING;
 }
 
 
 void Lightning::jolt(float deltaTime, glm::vec3 right){
-    const int numParticles = 7;
+    //const int numParticles = 7;
     const int delay = 120;
     if(m_particles.size() == 0){
         return;
