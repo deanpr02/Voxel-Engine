@@ -100,54 +100,14 @@ void Chunk::createCube(float x, float y, float z, float width){
     addVertex(p4); addTex(t1);
     addVertex(p7); addTex(t3);
     addVertex(p3); addTex(t2);
-    //addVertex(p0);
-    //addTex(t3);
-    //addVertex(p1);
-    //addTex(t2);
-    //addVertex(p2);
-    //addTex(t0);
-    //addVertex(p3);
-    //addTex(t1);
-    //addVertex(p4);
-    //addTex(t3);
-    //addVertex(p5);
-    //addTex(t2);
-    //addVertex(p6);
-    //addTex(t0);
-    //addVertex(p7);
-    //addTex(t1);
 
-    //int indexOffset = m_vertices.size() / 3 - 8;
     int indexOffset = m_vertices.size() / 5 - 24;
 
     for (int i = 0; i < 6; i++) {
-    int baseIndex = indexOffset + i * 4;
-    addTriangle(baseIndex, baseIndex + 1, baseIndex + 2);
-    addTriangle(baseIndex, baseIndex + 2, baseIndex + 3);
+        int baseIndex = indexOffset + i * 4;
+        addTriangle(baseIndex, baseIndex + 1, baseIndex + 2);
+        addTriangle(baseIndex, baseIndex + 2, baseIndex + 3);
 }
-    //front
-    //addTriangle(0+indexOffset,1+indexOffset,2+indexOffset);
-    //addTriangle(0+indexOffset,2+indexOffset,3+indexOffset);
-    //
-    ////back face
-    //addTriangle(4+indexOffset, 5+indexOffset, 6+indexOffset);
-    //addTriangle(4+indexOffset, 6+indexOffset, 7+indexOffset);
-//
-    ////left face
-    //addTriangle(0+indexOffset, 4+indexOffset, 5+indexOffset);
-    //addTriangle(0+indexOffset, 5+indexOffset, 1+indexOffset);
-//
-    ////right face
-    //addTriangle(3+indexOffset, 2+indexOffset, 6+indexOffset);
-    //addTriangle(3+indexOffset, 7+indexOffset, 6+indexOffset);
-//
-    ////top face
-    //addTriangle(1+indexOffset, 5+indexOffset, 6+indexOffset);
-    //addTriangle(1+indexOffset, 2+indexOffset, 6+indexOffset);
-//
-    ////bottom face
-    //addTriangle(4+indexOffset, 0+indexOffset, 3+indexOffset);
-    //addTriangle(4+indexOffset, 3+indexOffset, 7+indexOffset);
 }
 
 void Chunk::addVertex(glm::vec3 point){
@@ -198,29 +158,6 @@ void ChunkManager::setTextureMap(unsigned int texture){
     m_textureMap = texture;
 }
 
-//maybe change where i pass the heightmap into the chunk constructor itself
-//void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
-//    std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap = getHeightMap(worldPos);
-//    //std::cout<<heightMap[glm::vec3(16,0,16)]<<std::endl;
-//    for(int x = 0; x < CHUNK_SIZE; x++){
-//        for(int y = 0; y < CHUNK_HEIGHT; y++){
-//            for(int z = 0; z < CHUNK_SIZE; z++){
-//                glm::vec3 pos = glm::vec3(x,0,z);
-//                int height = std::floor((heightMap[pos]*CHUNK_HEIGHT));
-//                //std::cout<<height;
-//                if(y > height){
-//                    chunk->m_blocks[x][y][z].m_active = false;
-//                }
-//                if(chunk->m_blocks[x][y][z].m_active == false){
-//                    continue;
-//                }
-//                chunk->createCube(x,y,z);
-//            }
-//        }
-//    }
-//    chunk->initializeBuffer();
-//}
-
 void ChunkManager::createChunkMesh(Chunk* chunk, glm::vec3 worldPos){
     std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> heightMap = getHeightMap(worldPos);
     
@@ -257,18 +194,6 @@ std::unordered_map<glm::vec3,float,Vec3Hash,Vec3Equal> ChunkManager::getHeightMa
     }
     return heightMap;
 }
-
-//void ChunkManager::generateChunks(){
-//    for(int x = -CHUNK_SIZE; x <= CHUNK_SIZE; x+= CHUNK_SIZE){
-//        for(int z = -CHUNK_SIZE; z <= CHUNK_SIZE; z+= CHUNK_SIZE){
-//            glm::vec3 pos = glm::vec3(x,-CHUNK_SIZE,z);
-//            Chunk* chunk = new Chunk(pos);
-//            m_chunks.push_back(chunk);
-//        }
-//    }
-//    std::cout<<m_chunks.size();
-//}
-
 
 //still need to remove chunks when out of range. only call this when you cross a chunk boundary
 void ChunkManager::initializeChunks(glm::vec3 worldPos){
@@ -355,8 +280,6 @@ void ChunkManager::pollChunks(int xChunk, int zChunk, int newXChunk, int newZChu
         }
         
     }
-    //std::cout<<m_visibleChunks.size();
-
 
 }
 
@@ -411,5 +334,3 @@ void ChunkManager::renderChunks(){
     }
 }
 
-
-//everytime we move we will need to check to see if new chunks need to be rendered
