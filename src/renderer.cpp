@@ -43,7 +43,7 @@ void Renderer::drawWeapons(Camera* camera){
     std::vector<Particle> particles = m_weapons->m_currentSpell->m_particles;
     for(int i=0;i<particles.size();i++){
         Particle currParticle = particles[i];
-        glm::mat4 translatedBlock = glm::translate(blockSize,currParticle.offset);
+        glm::mat4 translatedBlock = glm::translate(blockSize,currParticle.position);
         currentShader->setMat4("model",translatedBlock);
         currParticle.draw();
     }

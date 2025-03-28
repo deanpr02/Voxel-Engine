@@ -3365,6 +3365,8 @@ CMakeFiles/VoxelEngine.dir/src/weapon.cpp.obj: C:/Users/deanp/OneDrive/Documents
   C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glm/glm/vec2.hpp \
   C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glm/glm/vec3.hpp \
   C:/Users/deanp/OneDrive/Documents/VoxelEngine/dependencies/glm/glm/vec4.hpp \
+  C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/camera.h \
+  C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/q_math.cpp \
   C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/spells.h \
   C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/types.h \
   C:/Users/deanp/OneDrive/Documents/VoxelEngine/src/weapon.h \

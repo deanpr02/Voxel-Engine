@@ -320,4 +320,6 @@ CMakeFiles/VoxelEngine.dir/src/weapon.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\ostream.tcc \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\istream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc \
- C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\types.h
+ C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\types.h \
+ C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\camera.h \
+ C:\Users\deanp\OneDrive\Documents\VoxelEngine\src\q_math.cpp

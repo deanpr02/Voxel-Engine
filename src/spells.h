@@ -19,13 +19,15 @@ class Particle{
     unsigned int ebo;
     std::vector<float> vertices;
     std::vector<int> indices;
-    glm::vec3 offset = glm::vec3(0,0,0);
+    glm::vec3 position;
+    glm::vec3 off = glm::vec3(0,0,0);
     glm::vec3 aim;
     int moveIndex = 0;
     glm::vec3 lastMove;
     float size;
 
     Particle(glm::vec3,glm::vec3,float,float);
+    Particle(glm::vec3,glm::vec3,float,std::vector<glm::vec3>,glm::mat4);
     void create(glm::vec3,glm::vec3);
     void initialize();
     void addVertex(glm::vec3);
@@ -37,6 +39,7 @@ class Particle{
 class Spell{
     public:
     std::vector<Particle> m_particles;
+    std::vector<glm::vec3> m_mesh;
     float spellVelocity;
     float spellRange;
     int spellDensity;
@@ -46,16 +49,17 @@ class Spell{
     SPELL_TYPE id;
 
     void drawParticle(glm::vec3);
-    void summon(glm::vec3,glm::vec3,glm::vec3);
+    void summon(glm::vec3,glm::vec3,glm::vec3,glm::mat4);
     std::vector<Particle> getParticles();
 
+    void createSpellMesh();
     virtual void tick(float,glm::vec3,glm::vec3);
 };
 
 class Lightning: public Spell{
     public:
 
-    Lightning();
+    Lightning(glm::mat4);
     void tick(float,glm::vec3,glm::vec3);
     void jolt(float,glm::vec3);
 };

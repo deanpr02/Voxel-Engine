@@ -12,7 +12,7 @@ Player::Player(){
 
     m_camera = new Camera();
     m_body = new PhysicsObject(&m_camera->m_pos);
-    m_weapons = new WeaponSystem();
+    m_weapons = new WeaponSystem(m_camera);
 }
 
 void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks){
@@ -85,5 +85,5 @@ void Player::jump(float deltaTime){
 void Player::cast(){
     glm::vec3 dir = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
     glm::vec3 origin = m_camera->m_pos + (m_camera->m_right * 1.0f);
-    m_weapons->spawn(origin,dir,m_camera->m_right);
+    m_weapons->spawn(origin,dir,m_camera->m_right,m_camera->getViewMatrix());
 }

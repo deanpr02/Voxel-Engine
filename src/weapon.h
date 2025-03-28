@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "spells.h"
+#include "camera.h"
 #include <iostream>
 
 
@@ -55,13 +56,14 @@
 class WeaponSystem{
     public:
     //std::vector<Spell> m_spells;
+    Camera* camera;
     std::vector<Spell*> m_spells;
     Spell* m_currentSpell;
 
-    WeaponSystem();
+    WeaponSystem(Camera*);
     void render();
     void draw();
-    void spawn(glm::vec3,glm::vec3,glm::vec3);
+    void spawn(glm::vec3,glm::vec3,glm::vec3,glm::mat4);
 };
 
 #endif

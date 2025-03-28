@@ -1,31 +1,57 @@
 #include "spells.h"
 
-Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, float pNum){
+//Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, float pNum){
+//    size = pSize;
+//    aim = dir;
+//    for(int i=-(pNum/2);i<=pNum/2;i++){
+//        glm::vec3 offsetPos = worldPos + (dir * (size*2*i)); // originally 0.05f*i
+//        create(offsetPos,dir);
+//    }
+//}
+
+Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, std::vector<glm::vec3> mesh,glm::mat4 viewMatrix){
     size = pSize;
     aim = dir;
-    for(int i=-(pNum/2);i<=pNum/2;i++){
-        glm::vec3 offsetPos = worldPos + (dir * (size*2*i)); // originally 0.05f*i
-        create(offsetPos,dir);
+    position = worldPos;
+    //std::vector<float> mesh = {0.0f,0.0f,0.0f,1.0f,0.0f,1.0f,2.0f,0.0f,2.0f,3.0f,0.0f,3.0f,4.0f,0.0f,4.0f,5.0f,0.0f,5.0f,6.0f,0.0f,6.0f};
+    for(int i=0;i<mesh.size();i++){
+        glm::vec3 vertex = glm::vec3(glm::vec4(mesh[i],1.0f) * viewMatrix);
+        vertex *= pSize;
+        //glm::vec3  * pSize;
+        //float y = mesh[i+1] * dir.y * pSize;
+        //float z = mesh[i+2] *  dir.z * pSize;
+        create(vertex,dir);
     }
+
 }
 
 void Particle::shift(float deltaTime, float velocity){
 
     //move particle forward
     glm::vec3 forward = (aim * deltaTime) * velocity;
-    offset += forward;
+    position += forward;
+    off += forward;
 }
 
 void Particle::create(glm::vec3 worldPos, glm::vec3 dir){
     glm::vec3 offset = dir;
-    glm::vec3 p0 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-left
-    glm::vec3 p1 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-left
-    glm::vec3 p2 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-right
-    glm::vec3 p3 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-right
-    glm::vec3 p4 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z+size); //back-bottom-left
-    glm::vec3 p5 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-left
-    glm::vec3 p6 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-right
-    glm::vec3 p7 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z+size);
+    offset += worldPos;
+    //glm::vec3 p0 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-left
+    //glm::vec3 p1 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-left
+    //glm::vec3 p2 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-right
+    //glm::vec3 p3 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-right
+    //glm::vec3 p4 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z+size); //back-bottom-left
+    //glm::vec3 p5 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-left
+    //glm::vec3 p6 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-right
+    //glm::vec3 p7 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z+size);
+    glm::vec3 p0 = glm::vec3(offset.x-size,offset.y-size,offset.z-size); //front-bottom-left
+    glm::vec3 p1 = glm::vec3(offset.x-size,offset.y+size,offset.z-size); //front-top-left
+    glm::vec3 p2 = glm::vec3(offset.x+size,offset.y+size,offset.z-size); //front-top-right
+    glm::vec3 p3 = glm::vec3(offset.x+size,offset.y-size,offset.z-size); //front-bottom-right
+    glm::vec3 p4 = glm::vec3(offset.x-size,offset.y-size,offset.z+size); //back-bottom-left
+    glm::vec3 p5 = glm::vec3(offset.x-size,offset.y+size,offset.z+size); //back-top-left
+    glm::vec3 p6 = glm::vec3(offset.x+size,offset.y+size,offset.z+size); //back-top-right
+    glm::vec3 p7 = glm::vec3(offset.x+size,offset.y-size,offset.z+size);
 
     addVertex(p0);
     addVertex(p1);
@@ -105,26 +131,38 @@ std::vector<Particle> Spell::getParticles(){
     return m_particles;
 }
 
-void Spell::summon(glm::vec3 origin, glm::vec3 dir, glm::vec3 right){
+void Spell::summon(glm::vec3 origin, glm::vec3 dir, glm::vec3 right,glm::mat4 viewMatrix){
     int random = -spellRadius + (std::rand() % (spellRadius * 2 + 1));
     for(int i=0;i<spellDensity;i++){
         float randomX = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
         float randomY = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
         glm::vec3 offsetOrigin = origin + (right*randomX);
         offsetOrigin += glm::vec3(0,randomY,0);
-        Particle p = Particle(offsetOrigin,dir,particleSize,numParticles);
+        Particle p = Particle(offsetOrigin,dir,particleSize,m_mesh,viewMatrix);
         m_particles.push_back(p);
     }
 }
 
-Lightning::Lightning(){
-    spellVelocity = 5.0f;
+void Spell::createSpellMesh(){
+    std::vector<glm::vec3> mesh;
+    for(int i=0;i<numParticles;i++){
+        glm::vec3 vertex = glm::vec3(0,0,i);
+        mesh.push_back(vertex);
+    }
+
+    m_mesh = mesh;
+}
+
+Lightning::Lightning(glm::mat4 viewMatrix){
+    spellVelocity = 1.0f;
     spellRange = 10.0f;
     spellDensity = 10;
     spellRadius = 10;
     particleSize = 0.025f;
     numParticles = 7;
     id = LIGHTNING;
+
+    createSpellMesh();
 }
 
 
@@ -154,6 +192,7 @@ void Lightning::jolt(float deltaTime, glm::vec3 right){
 
             // Apply same shift to all vertices of THIS cube
             glm::vec3 move = m_particles[i].lastMove;
+            //m_particles[i].position += move;
             for (int k = startIdx; k < endIdx; k += 3) {
                 m_particles[i].vertices[k]   += move.x;
                 m_particles[i].vertices[k+1] += move.y;
@@ -183,7 +222,7 @@ void Lightning::tick(float deltaTime,glm::vec3 dir, glm::vec3 right){
     jolt(deltaTime,right);
     for(auto it = m_particles.begin();it != m_particles.end();){
         Particle& p = *it;
-        float magnitude = std::abs(glm::length(p.offset));
+        float magnitude = std::abs(glm::length(p.off));
 
         if(magnitude <= spellRange){
             p.shift(deltaTime,spellVelocity);
