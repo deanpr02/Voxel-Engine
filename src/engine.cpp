@@ -100,13 +100,13 @@ int Engine::checkInit(){
 }
 
 
-void Engine::updateCamera(){
-    //Since our direction is calculated as a quaternion we need to extract ijk components to make a vec3.
-    //Our we generate our view matrix using the camera's position, direction from current position, and camera up vec
-    glm::vec3 camDirection = glm::vec3(m_camera.m_direction.i,m_camera.m_direction.j,m_camera.m_direction.k);
-    glm::mat4 view = glm::lookAt(m_camera.m_pos,m_camera.m_pos+camDirection,m_camera.m_up);
-    m_camera.m_viewMatrix = view;
-}
+//void Engine::updateCamera(){
+//    //Since our direction is calculated as a quaternion we need to extract ijk components to make a vec3.
+//    //Our we generate our view matrix using the camera's position, direction from current position, and camera up vec
+//    glm::vec3 camDirection = glm::vec3(m_camera.m_direction.i,m_camera.m_direction.j,m_camera.m_direction.k);
+//    glm::mat4 view = glm::lookAt(m_camera.m_pos,m_camera.m_pos+camDirection,m_camera.m_up);
+//    m_camera.m_viewMatrix = view;
+//}
 
 void Engine::draw(){
     m_renderer->render(player->m_camera);

@@ -24,7 +24,7 @@ typedef std::function<void()> FuncType;
 
 class Engine{
     public:
-    Camera m_camera; /* Camera class object that controlling viewable portion of map */
+    //Camera m_camera; /* Camera class object that controlling viewable portion of map */
     Renderer* m_renderer;
     PhysicsObject* m_player;
     Player* player;

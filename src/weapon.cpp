@@ -1,8 +1,9 @@
 #include "weapon.h"
 
 WeaponSystem::WeaponSystem(Camera* camera){
-    Lightning* spell_a = new Lightning(camera->getViewMatrix());
-    m_spells = std::vector<Spell*>{spell_a};
+    Lightning* spell_a = new Lightning();
+    WaterBall* spell_b = new WaterBall();
+    m_spells = std::vector<Spell*>{spell_a,spell_b};
     m_currentSpell = m_spells[0];
 }
 

@@ -23,6 +23,7 @@ class Renderer{
         Shader* s_light = new Shader();
         Shader* s_cube = new Shader();
         Shader* s_lightning = new Shader();
+        Shader* s_waterball = new Shader();
     };
 
     ChunkManager* m_chunkManager;

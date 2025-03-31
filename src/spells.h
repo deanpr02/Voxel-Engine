@@ -49,19 +49,33 @@ class Spell{
     SPELL_TYPE id;
 
     void drawParticle(glm::vec3);
-    void summon(glm::vec3,glm::vec3,glm::vec3,glm::mat4);
+    virtual void summon(glm::vec3,glm::vec3,glm::vec3,glm::mat4);
     std::vector<Particle> getParticles();
 
-    void createSpellMesh();
-    virtual void tick(float,glm::vec3,glm::vec3);
+    virtual void createSpellMesh();
+    virtual void tick(float,glm::vec3,glm::vec3,glm::vec3,glm::mat4);
 };
 
 class Lightning: public Spell{
     public:
 
-    Lightning(glm::mat4);
-    void tick(float,glm::vec3,glm::vec3);
+    Lightning();
+    void tick(float,glm::vec3,glm::vec3,glm::vec3,glm::mat4);
     void jolt(float,glm::vec3);
+    void createSpellMesh();
+};
+
+class WaterBall: public Spell{
+    public:
+    float growFactor = 0.05f;
+    float maxSize = 0.3f;
+    bool release = true;
+
+    WaterBall();
+    void tick(float,glm::vec3,glm::vec3,glm::vec3,glm::mat4);
+    void grow(float);
+    void createSpellMesh();
+    void summon(glm::vec3,glm::vec3,glm::vec3,glm::mat4);
 };
 
 #endif

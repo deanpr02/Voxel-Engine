@@ -18,13 +18,15 @@ Player::Player(){
 void Player::update(float deltaTime,std::unordered_map<glm::vec3,Chunk*,Vec3Hash,Vec3Equal> chunks){
     m_deltaTime = deltaTime;
     glm::vec3 camDirection = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
+    glm::vec3 forwardVec = glm::vec3(m_camera->m_forward.i,m_camera->m_forward.j,m_camera->m_forward.k);
     glm::mat4 view = glm::lookAt(m_camera->m_pos,m_camera->m_pos+camDirection,m_camera->m_up);
     m_camera->m_viewMatrix = view;
 
     m_currentChunks = chunks;
     m_body->applyGravity(m_currentChunks,deltaTime);
+
     //need to optimize where this is only called when a spell is equipped
-    m_weapons->m_currentSpell->tick(deltaTime,glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k),m_camera->m_right);
+    m_weapons->m_currentSpell->tick(deltaTime,camDirection,m_camera->m_right,m_camera->m_pos,m_camera->getViewMatrix());
     //m_weapons->render();
 }
 
@@ -84,6 +86,7 @@ void Player::jump(float deltaTime){
 
 void Player::cast(){
     glm::vec3 dir = glm::vec3(m_camera->m_direction.i,m_camera->m_direction.j,m_camera->m_direction.k);
-    glm::vec3 origin = m_camera->m_pos + (m_camera->m_right * 1.0f);
+    //glm::vec3 origin = m_camera->m_pos + (m_camera->m_right * 1.0f);
+    glm::vec3 origin = m_camera->m_pos;
     m_weapons->spawn(origin,dir,m_camera->m_right,m_camera->getViewMatrix());
 }
