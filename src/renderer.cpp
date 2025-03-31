@@ -38,14 +38,10 @@ void Renderer::drawWorld(Camera* camera){
 }
 
 void Renderer::drawWeapons(Camera* camera){
-    //std::cout << "x: " << camera->m_forward.i << "y: " << camera->m_forward.j << "z: " << camera->m_forward.k << std::endl;
     Shader* currentShader = m_spellShaders[m_weapons->m_currentSpell->id];
     currentShader->use();
     currentShader->setMat4("perspective",camera->m_projMatrix);
     currentShader->setMat4("view",camera->getViewMatrix());
-    
-    //float size = m_weapons->m_currentSpell->particleSize;
-    //glm::mat4 blockSize = glm::scale(glm::mat4(1.0f),glm::vec3(1.0f,1.0f,1.0f));
     
     std::vector<Particle> particles = m_weapons->m_currentSpell->m_particles;
     for(int i=0;i<particles.size();i++){
@@ -53,16 +49,9 @@ void Renderer::drawWeapons(Camera* camera){
         Particle currParticle = particles[i];
         glm::vec3 dir = glm::vec3(camera->m_direction.i,camera->m_direction.j,camera->m_direction.k) * 2.0f;
         dir += camera->m_right * 0.5f;
-        //glm::mat4 scale = glm::scale(glm::mat4(1.0f),glm::vec3(size));
-        //std::cout<< "par x: " << currParticle.position.x << "par y: " << currParticle.position.y << "par z: " << currParticle.position.z << std::endl;
         
         glm::mat4 translatedBlock = glm::translate(glm::mat4(1.0f),currParticle.position + dir);
-        //translatedBlock = glm::translate(translatedBlock,glm::vec3(size/2));
-        //translatedBlock = camera->getViewMatrix() * translatedBlock;
         translatedBlock = glm::scale(translatedBlock,glm::vec3(size));
-        //translatedBlock = glm::translate(translatedBlock,glm::vec3(-size/2));
-
-        //std::cout<<"x: " << currParticle.position.x<< "z: "<< currParticle.position.z << std::endl;
         
         currentShader->setMat4("model",translatedBlock);
         currParticle.draw();

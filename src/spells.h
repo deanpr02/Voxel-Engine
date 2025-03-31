@@ -53,14 +53,14 @@ class Spell{
     std::vector<Particle> getParticles();
 
     virtual void createSpellMesh();
-    virtual void tick(float,glm::vec3,glm::vec3,glm::vec3,glm::mat4);
+    virtual void tick(float,glm::vec3,glm::vec3,glm::vec3);
 };
 
 class Lightning: public Spell{
     public:
 
     Lightning();
-    void tick(float,glm::vec3,glm::vec3,glm::vec3,glm::mat4);
+    void tick(float,glm::vec3,glm::vec3,glm::vec3);
     void jolt(float,glm::vec3);
     void createSpellMesh();
 };
@@ -72,7 +72,7 @@ class WaterBall: public Spell{
     bool release = true;
 
     WaterBall();
-    void tick(float,glm::vec3,glm::vec3,glm::vec3,glm::mat4);
+    void tick(float,glm::vec3,glm::vec3,glm::vec3);
     void grow(float);
     void createSpellMesh();
     void summon(glm::vec3,glm::vec3,glm::vec3,glm::mat4);

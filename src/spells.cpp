@@ -1,28 +1,17 @@
 #include "spells.h"
 
-//Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, float pNum){
-//    size = pSize;
-//    aim = dir;
-//    for(int i=-(pNum/2);i<=pNum/2;i++){
-//        glm::vec3 offsetPos = worldPos + (dir * (size*2*i)); // originally 0.05f*i
-//        create(offsetPos,dir);
-//    }
-//}
-
 Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, std::vector<glm::vec3> mesh,glm::mat4 viewMatrix){
     size = pSize;
     aim = dir;
     position = worldPos;
     for(int i=0;i<mesh.size();i++){
         glm::vec3 vertex = glm::vec3(glm::vec4(mesh[i],1.0f) * viewMatrix);
-        //vertex *= pSize;
         create(vertex,dir);
     }
 
 }
 
 void Particle::shift(float deltaTime, float velocity){
-
     //move particle forward
     glm::vec3 forward = (aim * deltaTime) * velocity;
     position += forward;
@@ -30,17 +19,8 @@ void Particle::shift(float deltaTime, float velocity){
 }
 
 void Particle::create(glm::vec3 worldPos, glm::vec3 dir){
-    //glm::vec3 offset = glm::vec3(0,0,0);
-    //glm::vec3 offset = dir;
     glm::vec3 offset = worldPos;
-    //glm::vec3 p0 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-left
-    //glm::vec3 p1 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-left
-    //glm::vec3 p2 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z-size); //front-top-right
-    //glm::vec3 p3 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z-size); //front-bottom-right
-    //glm::vec3 p4 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y-size,worldPos.z+offset.z+size); //back-bottom-left
-    //glm::vec3 p5 = glm::vec3(worldPos.x+offset.x-size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-left
-    //glm::vec3 p6 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y+size,worldPos.z+offset.z+size); //back-top-right
-    //glm::vec3 p7 = glm::vec3(worldPos.x+offset.x+size,worldPos.y+offset.y-size,worldPos.z+offset.z+size);
+    
     glm::vec3 p0 = glm::vec3(offset.x-0.5f,offset.y-0.5f,offset.z-0.5f); //front-bottom-left
     glm::vec3 p1 = glm::vec3(offset.x-0.5f,offset.y+0.5f,offset.z-0.5f); //front-top-left
     glm::vec3 p2 = glm::vec3(offset.x+0.5f,offset.y+0.5f,offset.z-0.5f); //front-top-right
@@ -121,7 +101,7 @@ void Particle::draw(){
 }
 
 
-void Spell::tick(float deltaTime, glm::vec3 worldPos, glm::vec3 right,glm::vec3 pos,glm::mat4 view){
+void Spell::tick(float deltaTime, glm::vec3 worldPos, glm::vec3 right, glm::vec3 pos){
     std::cout<<"spell tick";
 }
 
@@ -185,7 +165,6 @@ void Lightning::jolt(float deltaTime, glm::vec3 right){
 
             // Apply same shift to all vertices of THIS cube
             glm::vec3 move = m_particles[i].lastMove;
-            //m_particles[i].position += move;
             for (int k = startIdx; k < endIdx; k += 3) {
                 m_particles[i].vertices[k]   += move.x;
                 m_particles[i].vertices[k+1] += move.y;
@@ -207,11 +186,9 @@ void Lightning::jolt(float deltaTime, glm::vec3 right){
         glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
         glEnableVertexAttribArray(0);
     }
-
 }
 
-
-void Lightning::tick(float deltaTime,glm::vec3 dir, glm::vec3 right,glm::vec3 pos,glm::mat4 view){
+void Lightning::tick(float deltaTime,glm::vec3 dir, glm::vec3 right,glm::vec3 pos){
     jolt(deltaTime,right);
     for(auto it = m_particles.begin();it != m_particles.end();){
         Particle& p = *it;
@@ -249,7 +226,7 @@ WaterBall::WaterBall(){
     createSpellMesh();
 }
 
-void WaterBall::tick(float deltaTime, glm::vec3 dir, glm::vec3 right,glm::vec3 pos,glm::mat4 view){
+void WaterBall::tick(float deltaTime, glm::vec3 dir, glm::vec3 right, glm::vec3 pos){
     for(auto it = m_particles.begin();it != m_particles.end();){
         Particle& p = *it;
         float magnitude = std::abs(glm::length(p.off));
@@ -265,20 +242,11 @@ void WaterBall::tick(float deltaTime, glm::vec3 dir, glm::vec3 right,glm::vec3 p
         }
         else{
             grow(deltaTime);
-            //glm::vec3 temp = right * it->size + dir * it->size;
-            // Adjust this value as needed
-            
-            // Position the particle in world space
             it->position = pos;
-            //it->position = viewSpacePos + (dir);
-            //it->position = glm::vec3(glm::vec4(pos - dir,1.0f) * view);
-            //std::cout<< "x: " << it->position.x << "y: " << it->position.y << "z: " << it->position.z << std::endl;
-            //it->position = glm::normalize(glm::vec3(glm::vec4(pos+dir,1.0f) * view));
             it->aim = dir;
             ++it;
         }
     }
-    //grow(deltaTime);
 }
 
 void WaterBall::grow(float deltaTime){
@@ -304,15 +272,9 @@ void WaterBall::summon(glm::vec3 origin, glm::vec3 dir, glm::vec3 right,glm::mat
     
     if(release && m_particles.size() == 0){
         for(int i=0;i<spellDensity;i++){
-            //float randomX = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
-            //float randomY = (-spellRadius + (std::rand() % (spellRadius * 2 + 1)))*0.02;
-            //glm::vec3 offsetOrigin = origin + (right*randomX);
-            //offsetOrigin += glm::vec3(0,randomY,0);
-            //glm::vec3 offsetOrigin = origin - glm::vec3(15.0f,0,15.0f);
             Particle p = Particle(origin,dir,particleSize,m_mesh,viewMatrix);
             m_particles.push_back(p);
         }
-        //release = !release;
     }
     else{
         release = false;
