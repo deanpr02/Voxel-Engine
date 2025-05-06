@@ -5,7 +5,7 @@ Particle::Particle(glm::vec3 worldPos, glm::vec3 dir, float pSize, std::vector<g
     aim = dir;
     position = worldPos;
     for(int i=0;i<mesh.size();i++){
-        glm::vec3 vertex = glm::vec3(glm::vec4(mesh[i],1.0f) * viewMatrix);
+        glm::vec3 vertex = glm::vec3(glm::vec4(mesh[i],1.0f)); // * viewMatrix
         create(vertex,dir);
     }
 
@@ -18,8 +18,8 @@ void Particle::shift(float deltaTime, float velocity){
     off += forward;
 }
 
-void Particle::create(glm::vec3 worldPos, glm::vec3 dir){
-    glm::vec3 offset = worldPos;
+void Particle::create(glm::vec3 modelPos, glm::vec3 dir){
+    glm::vec3 offset = modelPos;
     
     glm::vec3 p0 = glm::vec3(offset.x-0.5f,offset.y-0.5f,offset.z-0.5f); //front-bottom-left
     glm::vec3 p1 = glm::vec3(offset.x-0.5f,offset.y+0.5f,offset.z-0.5f); //front-top-left
@@ -260,9 +260,78 @@ void WaterBall::grow(float deltaTime){
 
 void WaterBall::createSpellMesh(){
     std::vector<glm::vec3> mesh;
-    for(int i=0;i<numParticles;i++){
-        glm::vec3 vertex = glm::vec3(0,0,i);
-        mesh.push_back(vertex);
+    int xRange = 3;
+    int yRange = 3;
+    int zRange = 3;
+    int cornerNum = xRange / 2;
+    int cornerOff = 0;
+    
+    for(int y=1;y<=yRange;y++){
+        //corners
+        for(int c=0;c<cornerNum;c++){
+            for(int d=0;d<cornerNum;d++){
+                int tempc = xRange - (c + y + cornerOff);
+                int tempd = xRange - (d + y + cornerOff);
+                if(cornerNum > 1 && d == c){
+                    continue;
+                }
+                mesh.push_back(glm::vec3(tempc,y,tempd));
+                mesh.push_back(glm::vec3(-tempc,y,tempd));
+                mesh.push_back(glm::vec3(tempc,y,-tempd));
+                mesh.push_back(glm::vec3(-tempc,y,-tempd));
+                //std::cout<<"x: " << tempc << "z: " << tempd << std::endl;
+                //std::cout<<"x: " << -tempc << "z: " << tempd << std::endl;
+                //std::cout<<"x: " << tempc << "z: " << -tempd << std::endl;
+                //std::cout<<"x: " << -tempc << "z: " << -tempd << std::endl;
+            }
+        }
+        cornerNum -= 1;
+        cornerOff += 1;
+        for(int i=-xRange/2;i<=xRange/2;i++){
+            for(int j=-zRange;j<=zRange;j+=zRange*2){
+                mesh.push_back(glm::vec3(j,y,i));
+                mesh.push_back(glm::vec3(i,y,j));
+                //std::cout<<"x: " << j << "y: " << y << "z: " << i << std::endl; 
+                //std::cout<<"x: " << i << "y: " << y << "z: " << j << std::endl; 
+            }
+        }
+        zRange -= 1;
+    }
+
+    zRange = 3;
+    yRange = -3;
+    cornerNum = xRange / 2;
+    cornerOff = 0;
+    for(int y=-1;y>=yRange;y--){
+        //corners
+        for(int c=0;c<cornerNum;c++){
+            for(int d=0;d<cornerNum;d++){
+                int tempc = xRange - (c - y + cornerOff);
+                int tempd = xRange - (d - y + cornerOff);
+                if(cornerNum > 1 && d == c){
+                    continue;
+                }
+                mesh.push_back(glm::vec3(tempc,y,tempd));
+                mesh.push_back(glm::vec3(-tempc,y,tempd));
+                mesh.push_back(glm::vec3(tempc,y,-tempd));
+                mesh.push_back(glm::vec3(-tempc,y,-tempd));
+                //std::cout<<"x: " << tempc << "z: " << tempd << std::endl;
+                //std::cout<<"x: " << -tempc << "z: " << tempd << std::endl;
+                //std::cout<<"x: " << tempc << "z: " << -tempd << std::endl;
+                //std::cout<<"x: " << -tempc << "z: " << -tempd << std::endl;
+            }
+        }
+        cornerNum -= 1;
+        cornerOff += 1;
+        for(int i=-xRange/2;i<=xRange/2;i++){
+            for(int j=-zRange;j<=zRange;j+=zRange*2){
+                mesh.push_back(glm::vec3(j,y,i));
+                mesh.push_back(glm::vec3(i,y,j));
+                //std::cout<<"x: " << j << "y: " << y << "z: " << i << std::endl; 
+                //std::cout<<"x: " << i << "y: " << y << "z: " << j << std::endl; 
+            }
+        }
+        zRange -= 1;
     }
 
     m_mesh = mesh;

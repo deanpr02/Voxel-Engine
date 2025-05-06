@@ -42,7 +42,17 @@ void Renderer::drawWeapons(Camera* camera){
     currentShader->use();
     currentShader->setMat4("perspective",camera->m_projMatrix);
     currentShader->setMat4("view",camera->getViewMatrix());
-    
+    glm::vec3 camForward = glm::normalize(glm::vec3(camera->m_direction.i, camera->m_direction.j, camera->m_direction.k) + camera->m_right * 0.5f);
+    glm::vec3 camRight = glm::normalize(camera->m_right);
+    glm::vec3 camUp = glm::normalize(glm::cross(camRight, camForward));
+
+    glm::mat4 rotationMatrix = glm::mat4(
+        glm::vec4(camRight, 0.0f),
+        glm::vec4(camUp, 0.0f),
+        glm::vec4(-camForward, 0.0f),  // Negative because we want it to face toward camera
+        glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)
+    );
+
     std::vector<Particle> particles = m_weapons->m_currentSpell->m_particles;
     for(int i=0;i<particles.size();i++){
         float size = particles[i].size;
@@ -51,6 +61,7 @@ void Renderer::drawWeapons(Camera* camera){
         dir += camera->m_right * 0.5f;
         
         glm::mat4 translatedBlock = glm::translate(glm::mat4(1.0f),currParticle.position + dir);
+        translatedBlock = translatedBlock * rotationMatrix; //this was new
         translatedBlock = glm::scale(translatedBlock,glm::vec3(size));
         
         currentShader->setMat4("model",translatedBlock);

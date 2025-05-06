@@ -68,7 +68,7 @@ class Lightning: public Spell{
 class WaterBall: public Spell{
     public:
     float growFactor = 0.05f;
-    float maxSize = 0.3f;
+    float maxSize = 0.1f;
     bool release = true;
 
     WaterBall();
